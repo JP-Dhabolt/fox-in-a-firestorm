@@ -1,4 +1,5 @@
 extends KinematicBody2D
+class_name Player
 
 var GRAVITY: int = 15
 var MOVEMENT_SPEED: int = 150
@@ -24,6 +25,13 @@ var velocity: Vector2 = Vector2.ZERO
 var currentState = State.NORMAL
 
 onready var sprite := $AnimatedSprite as AnimatedSprite
+onready var hurtTimer := $HurtTimer as Timer
+onready var eatTimer := $EatTimer as Timer
+
+
+func eat():
+	if currentState == State.POUNCING:
+		_transition_to_crouching()
 
 
 func _physics_process(_delta):
@@ -91,12 +99,33 @@ func _transition_to_pouncing():
 
 func _handle_pouncing_state():
 	if is_on_floor():
-		_transition_to_normal()
+		# If we're on the floor, we haven't hit leaves, so we're stunned
+		_transition_to_hurting()
+
+
+func _transition_to_crouching():
+	currentState = State.CROUCHING
+	sprite.play(crouchAnimation)
+	eatTimer.start()
 
 
 func _handle_crouching_state():
 	pass
 
 
+func _transition_to_hurting():
+	currentState = State.HURTING
+	sprite.play(hurtAnimation)
+	hurtTimer.start()
+
+
 func _handle_hurting_state():
 	pass
+
+
+func _on_HurtTimer_timeout():
+	_transition_to_normal()
+
+
+func _on_EatTimer_timeout():
+	_transition_to_normal()

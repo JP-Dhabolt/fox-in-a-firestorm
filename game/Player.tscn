@@ -120,9 +120,18 @@ script = ExtResource( 2 )
 position = Vector2( 10.5, 6 )
 frames = SubResource( 5 )
 animation = "Idle"
-frame = 2
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 10, 13.5 )
 shape = SubResource( 6 )
+
+[node name="HurtTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="EatTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="HurtTimer" to="." method="_on_HurtTimer_timeout"]
+[connection signal="timeout" from="EatTimer" to="." method="_on_EatTimer_timeout"]
