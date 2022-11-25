@@ -60,12 +60,8 @@ func _transition_to_normal():
 
 
 func _handle_shared_input():
-	if Input.is_action_pressed("ui_right"):
-		velocity.x = MOVEMENT_SPEED
-	elif Input.is_action_pressed("ui_left"):
-		velocity.x = -MOVEMENT_SPEED
-	else:
-		velocity.x = 0
+	var movement = Input.get_axis("move_left", "move_right")
+	velocity.x = movement * MOVEMENT_SPEED
 
 
 func _handle_normal_state():
@@ -74,7 +70,7 @@ func _handle_normal_state():
 	else:
 		sprite.play(idleAnimation)
 
-	if Input.is_action_just_pressed("ui_up"):
+	if Input.is_action_just_pressed("jump"):
 		_transition_to_jumping()
 
 
@@ -87,7 +83,7 @@ func _transition_to_jumping():
 func _handle_jumping_state():
 	if is_on_floor():
 		_transition_to_normal()
-	if Input.is_action_just_pressed("ui_up"):
+	if Input.is_action_just_pressed("jump"):
 		_transition_to_pouncing()
 
 
