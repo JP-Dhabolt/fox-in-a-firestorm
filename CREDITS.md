@@ -12,3 +12,7 @@
 * "SunnyLand 2D Pixel Art Pack" by ansimuz licensed CC0: https://opengameart.org/content/sunny-land-2d-pixel-art-pack
 * "Mountain at Dusk Background" by ansimuz licensed CC0: https://opengameart.org/content/mountain-at-dusk-background
 
+## Code Assets
+
+* "Gut" licensed MIT: https://github.com/bitwes/Gut
+
