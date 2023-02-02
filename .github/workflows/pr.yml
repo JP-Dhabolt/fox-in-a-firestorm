@@ -20,7 +20,8 @@ jobs:
         DEFAULT_BUMP: patch
 
     - name: Run Tests
-      uses: ceceppa/godot-gut-ci@0.1.0
+      # Using full SHA as this action is not properly tagged
+      uses: ceceppa/godot-gut-ci@83f7999fcf4d2be3f5386c8ddad173064a00ec70
       env:
         PWD: ./game/
       with:
