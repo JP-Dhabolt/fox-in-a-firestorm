@@ -20,12 +20,10 @@ jobs:
         DEFAULT_BUMP: patch
 
     - name: Run Tests
-      # Using full SHA as this action is not properly tagged
-      uses: ceceppa/godot-gut-ci@83f7999fcf4d2be3f5386c8ddad173064a00ec70
-      env:
-        PWD: ./game/
+      uses: JP-Dhabolt/godot-gut-ci@non-root-path-support
       with:
         godot_version: 3.5.1
+        working_dir: ./game/
 
     - name: Build Game
       uses: firebelley/godot-export@v4.7.0
