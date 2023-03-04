@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends CharacterBody2D
 class_name Player
 
 var GRAVITY: int = 15
@@ -14,19 +14,18 @@ var hurtAnimation: String = "Hurt"
 var pounceAnimation: String = "Pounce"
 
 enum State {
-    NORMAL,
-    JUMPING,
-    POUNCING,
-    CROUCHING,
-    HURTING,
+	NORMAL,
+	JUMPING,
+	POUNCING,
+	CROUCHING,
+	HURTING,
 }
 
-var velocity: Vector2 = Vector2.ZERO
 var currentState = State.NORMAL
 
-onready var sprite := $AnimatedSprite as AnimatedSprite
-onready var hurtTimer := $HurtTimer as Timer
-onready var eatTimer := $EatTimer as Timer
+@onready var sprite := $AnimatedSprite2D as AnimatedSprite2D
+@onready var hurtTimer := $HurtTimer as Timer
+@onready var eatTimer := $EatTimer as Timer
 
 
 func eat():
@@ -38,7 +37,10 @@ func _physics_process(_delta):
 	velocity.y += GRAVITY
 	_handle_shared_input()
 	_handle_state()
-	velocity = move_and_slide(velocity, Vector2.UP)
+	set_velocity(velocity)
+	set_up_direction(Vector2.UP)
+	move_and_slide()
+	velocity = velocity
 
 
 func _handle_state():
