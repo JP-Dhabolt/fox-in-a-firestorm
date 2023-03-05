@@ -1,4 +1,7 @@
 res://default_env.tres
-res://World.tscn
-res://Player.tscn
-res://Leaves.tscn
+res://scenes/levels/TestLevel.tscn
+res://scenes/interface/MainMenu.tscn
+res://scenes/interface/blur.gdshader
+res://scenes/interface/MainMenu.gd
+res://scenes/levels/Main.tscn
+res://scenes/characters/Player.tscn
