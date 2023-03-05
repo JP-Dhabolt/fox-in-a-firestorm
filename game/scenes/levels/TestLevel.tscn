@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://b2fjhxvycw4cd"]
+[gd_scene load_steps=4 format=3 uid="uid://dsyeewn78c28r"]
 
-[ext_resource type="PackedScene" uid="uid://dwfuuw8xx8l86" path="res://Block.tscn" id="1"]
-[ext_resource type="PackedScene" uid="uid://cqnuwdbv7t1jm" path="res://Player.tscn" id="2"]
-[ext_resource type="PackedScene" uid="uid://bo1vowev6obyq" path="res://Leaves.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://dwfuuw8xx8l86" path="res://scenes/objects/Block.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://cqnuwdbv7t1jm" path="res://scenes/characters/Player.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Leaves.tscn" id="3"]
 
 [node name="World" type="Node2D"]
 position = Vector2(128, 128)

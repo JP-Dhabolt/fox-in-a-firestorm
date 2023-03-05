@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://cwlq63ooe0kf1"]
+
+[ext_resource type="Texture2D" uid="uid://b2nlw4agsakeo" path="res://sprites/sunnyland_forest_of_illusion/back.png" id="1_iohad"]
+[ext_resource type="Texture2D" uid="uid://6ui8eidfwdx7" path="res://sprites/sunnyland_forest_of_illusion/middle.png" id="2_rflj3"]
+[ext_resource type="PackedScene" uid="uid://c2cih655wsces" path="res://scenes/interface/MainMenu.tscn" id="3_iaaow"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(80, 101)
+texture = ExtResource("1_iohad")
+
+[node name="Background2" type="Sprite2D" parent="."]
+position = Vector2(240, 100)
+texture = ExtResource("1_iohad")
+
+[node name="Middle" type="Sprite2D" parent="."]
+position = Vector2(155, 99)
+texture = ExtResource("2_rflj3")
+
+[node name="MainMenu" parent="." instance=ExtResource("3_iaaow")]
+offset_left = 158.0
+offset_top = 95.0
+offset_right = 158.0
+offset_bottom = 95.0
