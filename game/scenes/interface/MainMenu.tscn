@@ -1,20 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://c2cih655wsces"]
+[gd_scene load_steps=2 format=3 uid="uid://be1sw78cnhfjp"]
 
-[ext_resource type="Shader" path="res://scenes/interface/blur.gdshader" id="1_8q56i"]
 [ext_resource type="Script" path="res://scenes/interface/MainMenu.gd" id="2_g1n1f"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_oukxm"]
-shader = ExtResource("1_8q56i")
-shader_parameter/blur = 0.843
-shader_parameter/brightness = 0.899
-
 [node name="MainMenu" type="ColorRect"]
-material = SubResource("ShaderMaterial_oukxm")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(1, 1, 1, 0)
 script = ExtResource("2_g1n1f")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
