@@ -1,3 +1,9 @@
-res://scenes/characters/Player.gd
+res://scenes/interface/MainMenu.gd
+res://scenes/interface/MenuModal/MenuModal.gd
 res://default_env.tres
+res://scenes/levels/TestLevel.tscn
+res://scenes/levels/Main.tscn
 res://scenes/systems/TerrainGenerator.tscn
+res://scenes/systems/TerrainGenerator.gd
+res://scenes/characters/Player.gd
+res://scenes/characters/Player.tscn

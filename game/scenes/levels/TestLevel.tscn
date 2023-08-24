@@ -1,14 +1,13 @@
 [gd_scene load_steps=6 format=3 uid="uid://dsyeewn78c28r"]
 
 [ext_resource type="PackedScene" uid="uid://dwfuuw8xx8l86" path="res://scenes/objects/Block.tscn" id="1"]
-[ext_resource type="Script" path="res://scenes/levels/TestLevel.gd" id="1_o6ebi"]
 [ext_resource type="PackedScene" uid="uid://cqnuwdbv7t1jm" path="res://scenes/characters/Player.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://scenes/objects/Leaves.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://g5xdeqs6ky7f" path="res://scenes/interface/MenuModal/MenuModal.tscn" id="5_hsehm"]
+[ext_resource type="PackedScene" uid="uid://ceqcxqo62twgj" path="res://scenes/systems/TerrainGenerator.tscn" id="5_p6tqq"]
 
 [node name="World" type="Node2D"]
 position = Vector2(128, 128)
-script = ExtResource("1_o6ebi")
 
 [node name="Block" parent="." instance=ExtResource("1")]
 position = Vector2(8, 8)
@@ -75,3 +74,6 @@ offset_left = 32.0
 offset_top = -38.0
 offset_right = 32.0
 offset_bottom = -38.0
+
+[node name="TerrainGenerator" parent="." instance=ExtResource("5_p6tqq")]
+position = Vector2(-128, -128)
