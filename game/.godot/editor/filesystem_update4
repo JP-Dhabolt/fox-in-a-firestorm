@@ -7,3 +7,4 @@ res://scenes/systems/TerrainGenerator.tscn
 res://scenes/systems/TerrainGenerator.gd
 res://scenes/characters/Player.gd
 res://scenes/characters/Player.tscn
+res://scripts/NoiseForTerrain.gd

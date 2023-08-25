@@ -3,7 +3,7 @@ class_name Player
 
 var GRAVITY: int = 15
 var MOVEMENT_SPEED: int = 150
-var JUMP_FORCE: int = 200
+@export var jump_force: int = 200
 var POUNCE_FORCE: int = 50
 
 var jumpAnimation: String = "Jump"
@@ -78,7 +78,7 @@ func _handle_normal_state():
 
 func _transition_to_jumping():
 	currentState = State.JUMPING
-	velocity.y = -JUMP_FORCE
+	velocity.y = -jump_force
 	sprite.play(jumpAnimation)
 
 

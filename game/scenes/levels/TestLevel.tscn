@@ -1,79 +1,24 @@
-[gd_scene load_steps=6 format=3 uid="uid://dsyeewn78c28r"]
+[gd_scene load_steps=4 format=3 uid="uid://dsyeewn78c28r"]
 
-[ext_resource type="PackedScene" uid="uid://dwfuuw8xx8l86" path="res://scenes/objects/Block.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://cqnuwdbv7t1jm" path="res://scenes/characters/Player.tscn" id="2"]
-[ext_resource type="PackedScene" path="res://scenes/objects/Leaves.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://g5xdeqs6ky7f" path="res://scenes/interface/MenuModal/MenuModal.tscn" id="5_hsehm"]
 [ext_resource type="PackedScene" uid="uid://ceqcxqo62twgj" path="res://scenes/systems/TerrainGenerator.tscn" id="5_p6tqq"]
 
 [node name="World" type="Node2D"]
 position = Vector2(128, 128)
 
-[node name="Block" parent="." instance=ExtResource("1")]
-position = Vector2(8, 8)
-
-[node name="Block2" parent="." instance=ExtResource("1")]
-position = Vector2(24, 8)
-
-[node name="Block3" parent="." instance=ExtResource("1")]
-position = Vector2(40, 8)
-
-[node name="Block4" parent="." instance=ExtResource("1")]
-position = Vector2(56, 8)
-
-[node name="Block5" parent="." instance=ExtResource("1")]
-position = Vector2(72, 8)
-
-[node name="Block6" parent="." instance=ExtResource("1")]
-position = Vector2(72, -8)
-
-[node name="Block7" parent="." instance=ExtResource("1")]
-position = Vector2(88, 24)
-
-[node name="Block17" parent="." instance=ExtResource("1")]
-position = Vector2(72, 24)
-
-[node name="Block16" parent="." instance=ExtResource("1")]
-position = Vector2(104, 24)
-
-[node name="Block18" parent="." instance=ExtResource("1")]
-position = Vector2(120, 24)
-
-[node name="Block8" parent="." instance=ExtResource("1")]
-position = Vector2(120, 8)
-
-[node name="Block9" parent="." instance=ExtResource("1")]
-position = Vector2(136, 8)
-
-[node name="Block10" parent="." instance=ExtResource("1")]
-position = Vector2(136, -8)
-
-[node name="Block11" parent="." instance=ExtResource("1")]
-position = Vector2(136, -24)
-
-[node name="Block12" parent="." instance=ExtResource("1")]
-position = Vector2(-8, 8)
-
-[node name="Block13" parent="." instance=ExtResource("1")]
-position = Vector2(-24, 8)
-
-[node name="Block14" parent="." instance=ExtResource("1")]
-position = Vector2(-24, -8)
-
-[node name="Block15" parent="." instance=ExtResource("1")]
-position = Vector2(-24, -24)
-
 [node name="Player" parent="." instance=ExtResource("2")]
-position = Vector2(-7, -39)
+position = Vector2(-75, -75)
+jump_force = 300
 
-[node name="Leaves" parent="." instance=ExtResource("3")]
-position = Vector2(96, 8)
+[node name="Camera2D" type="Camera2D" parent="Player"]
 
-[node name="MenuModal" parent="." instance=ExtResource("5_hsehm")]
-offset_left = 32.0
-offset_top = -38.0
-offset_right = 32.0
-offset_bottom = -38.0
+[node name="MenuModal" parent="Player" instance=ExtResource("5_hsehm")]
+offset_left = 107.0
+offset_top = 37.0
+offset_right = 107.0
+offset_bottom = 37.0
 
-[node name="TerrainGenerator" parent="." instance=ExtResource("5_p6tqq")]
+[node name="TerrainGenerator" parent="." node_paths=PackedStringArray("player_node") instance=ExtResource("5_p6tqq")]
 position = Vector2(-128, -128)
+player_node = NodePath("../Player")
