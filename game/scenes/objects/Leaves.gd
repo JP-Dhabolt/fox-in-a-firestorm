@@ -17,5 +17,6 @@ func _ready():
 
 
 func _on_Leaves_body_entered(body: Node):
+	print("On leaves body entered")
 	if body is Player:
 		body.eat()

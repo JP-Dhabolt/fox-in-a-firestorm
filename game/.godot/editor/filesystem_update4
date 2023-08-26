@@ -8,3 +8,7 @@ res://scenes/systems/TerrainGenerator.gd
 res://scenes/characters/Player.gd
 res://scenes/characters/Player.tscn
 res://scripts/NoiseForTerrain.gd
+res://custom_resources/SpawnableItem.gd
+res://scenes/levels/TestLevel/SpawnableLeaf.tres
+res://scenes/objects/Leaves.tscn
+res://scenes/objects/Leaves.gd
