@@ -12,3 +12,4 @@ res://custom_resources/SpawnableItem.gd
 res://scenes/levels/TestLevel/SpawnableLeaf.tres
 res://scenes/objects/Leaves.tscn
 res://scenes/objects/Leaves.gd
+res://scenes/interface/MenuModal/MenuModal.tscn
