@@ -17,6 +17,7 @@ static func get_noise_by_type(noise_type: NoiseForTerrainType) -> FastNoiseLite:
 
 static func _generate_initial_noise() -> FastNoiseLite:
 	var fast_noise = FastNoiseLite.new()
+	fast_noise.seed = randi()
 	fast_noise.noise_type = FastNoiseLite.TYPE_PERLIN
 	fast_noise.domain_warp_enabled = true
 	fast_noise.domain_warp_amplitude = 89.5
@@ -36,6 +37,7 @@ static func _generate_initial_noise() -> FastNoiseLite:
 
 static func _generate_random_noise() -> FastNoiseLite:
 	var fast_noise = FastNoiseLite.new()
+	fast_noise.seed = randi()
 	fast_noise.noise_type = FastNoiseLite.TYPE_PERLIN
 	fast_noise.domain_warp_enabled = randi_range(0, 1) == 0
 	fast_noise.domain_warp_amplitude = randf_range(0.0, 100.0)
