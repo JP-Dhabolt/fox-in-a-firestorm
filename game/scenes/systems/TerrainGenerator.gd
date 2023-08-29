@@ -25,6 +25,7 @@ func _ready():
 	min_y = ceil(max_y / 3.0)
 	for x in range(min_x, max_x + 5):
 		_place_tile(x)
+	_draw_left_boundary()
 
 	latest_x_drawn = max_x + 5
 
@@ -75,6 +76,10 @@ func _place_tile(x: int):
 	var vectors = range(y_val, max_y).map(func(y): return Vector2i(x, y))
 	tilemap.set_cells_terrain_connect(0, vectors, 0, 0)
 	_place_objects(x, y_val)
+
+func _draw_left_boundary():
+	var vectors = range(0, max_y).map(func(y): return Vector2i(-1, y))
+	tilemap.set_cells_terrain_connect(0, vectors, 0, 0)
 
 func _place_objects(x: int, y: int):
 	rng.seed = x
