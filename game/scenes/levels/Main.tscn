@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b2nlw4agsakeo" path="res://sprites/sunnyland_forest_of_illusion/back.png" id="1_iohad"]
 [ext_resource type="Texture2D" uid="uid://6ui8eidfwdx7" path="res://sprites/sunnyland_forest_of_illusion/middle.png" id="2_rflj3"]
-[ext_resource type="PackedScene" uid="uid://c2cih655wsces" path="res://scenes/interface/MainMenu.tscn" id="3_iaaow"]
+[ext_resource type="PackedScene" uid="uid://be1sw78cnhfjp" path="res://scenes/interface/MainMenu.tscn" id="3_iaaow"]
 
 [node name="Main" type="Node2D"]
 

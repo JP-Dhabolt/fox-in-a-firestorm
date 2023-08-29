@@ -1,14 +1,15 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=4 format=3 uid="uid://bbgdrnpmiv3ny"]
 
 [ext_resource type="Texture2D" uid="uid://dsawci5tmxbhw" path="res://sprites/sunnyland_tall_forest_environment/Plant.png" id="1"]
 [ext_resource type="Script" path="res://scenes/objects/Leaves.gd" id="2"]
-
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(28, 12)
 
 [node name="Leaves" type="Area2D"]
 position = Vector2(0, -8)
+collision_layer = 8
+collision_mask = 2
 script = ExtResource("2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

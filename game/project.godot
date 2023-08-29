@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Fox_in_a_Firestorm"
 run/main_scene="res://scenes/levels/Main.tscn"
-config/features=PackedStringArray("4.0")
+config/features=PackedStringArray("4.1")
 config/icon="res://icon.png"
 
 [display]
@@ -94,11 +94,19 @@ move_right={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Ground"
+2d_physics/layer_2="Player"
+2d_physics/layer_3="Enemies"
+2d_physics/layer_4="Objects"
+2d_physics/layer_5="Fire"
+
 [physics]
 
 common/enable_pause_aware_picking=true
 
 [rendering]
 
-environment/defaults/default_environment="res://default_env.tres"
 textures/canvas_textures/default_texture_filter=0
+environment/defaults/default_environment="res://default_env.tres"
