@@ -14,13 +14,14 @@ jump_force = 300
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 
-[node name="MenuModal" parent="Player" instance=ExtResource("5_hsehm")]
-offset_left = 107.0
-offset_top = 37.0
-offset_right = 107.0
-offset_bottom = 37.0
-
 [node name="TerrainGenerator" parent="." node_paths=PackedStringArray("player_node") instance=ExtResource("5_p6tqq")]
 position = Vector2(-128, -128)
 player_node = NodePath("../Player")
 spawnable_items = Array[Resource("res://custom_resources/SpawnableItem.gd")]([ExtResource("4_dxeso")])
+
+[node name="MenuModal" parent="." instance=ExtResource("5_hsehm")]
+top_level = true
+offset_left = 158.0
+offset_top = 95.0
+offset_right = -162.0
+offset_bottom = -85.0
