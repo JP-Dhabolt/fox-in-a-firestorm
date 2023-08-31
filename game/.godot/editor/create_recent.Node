@@ -1,10 +1,11 @@
+Node
+Label
 Camera2D
 TileMap
 AnimationPlayer
 Sprite2D
 Button
 HSeparator
-Label
 VBoxContainer
 MarginContainer
 PanelContainer

@@ -13,3 +13,17 @@ res://scenes/levels/TestLevel/SpawnableLeaf.tres
 res://scenes/objects/Leaves.tscn
 res://scenes/objects/Leaves.gd
 res://scenes/interface/MenuModal/MenuModal.tscn
+res://scenes/systems/State.gd
+res://scenes/systems/StateMachine.gd
+res://scenes/characters/Player/Idle.gd
+res://scenes/characters/Player/PlayerState.gd
+res://scenes/characters/Player/Player.gd
+res://scenes/characters/Player/PlayerStateMachine.gd
+res://scenes/characters/Player/StateLabel.gd
+res://scenes/characters/Player/Player.tscn
+res://scenes/characters/Player/Jumping.gd
+res://scenes/characters/Player/Pouncing.gd
+res://scenes/characters/Player/Normal.gd
+res://scenes/characters/Player/Crouching.gd
+res://scenes/characters/Player/Hurting.gd
+res://scenes/characters/Player/Eating.gd

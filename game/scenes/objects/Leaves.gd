@@ -1,4 +1,5 @@
 extends Area2D
+class_name Leaves
 
 
 # Declare member variables here. Examples:
@@ -17,5 +18,6 @@ func _ready():
 
 
 func _on_Leaves_body_entered(body: Node):
-	if body is Player:
-		body.eat()
+	var player := body as Player
+	if player != null:
+		player.on_collision(self)
