@@ -1,0 +1,21 @@
+extends CharacterBody2D
+class_name Player
+
+signal collided_with(node: Node2D)
+
+@export var gravity: int = 15
+@export var movement_speed: int = 150
+@export var jump_force: int = 200
+@export var pounce_force: int = 50
+
+@onready var sprite := $AnimatedSprite2D as AnimatedSprite2D
+
+func _physics_process(_delta):
+	velocity.y += gravity
+	set_velocity(velocity)
+	set_up_direction(Vector2.UP)
+	move_and_slide()
+	velocity = velocity
+
+func on_collision(node: Node2D):
+	emit_signal("collided_with", node)
