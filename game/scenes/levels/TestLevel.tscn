@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dsyeewn78c28r"]
+[gd_scene load_steps=6 format=3 uid="uid://dsyeewn78c28r"]
 
-[ext_resource type="PackedScene" uid="uid://cqnuwdbv7t1jm" path="res://scenes/characters/Player.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://cqnuwdbv7t1jm" path="res://scenes/characters/Player/Player.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://ub25a470q2tw" path="res://scenes/interface/HUD/HUD.tscn" id="2_j5s88"]
 [ext_resource type="Resource" uid="uid://bxrhlvm471kb3" path="res://scenes/levels/TestLevel/SpawnableLeaf.tres" id="4_dxeso"]
 [ext_resource type="PackedScene" uid="uid://g5xdeqs6ky7f" path="res://scenes/interface/MenuModal/MenuModal.tscn" id="5_hsehm"]
 [ext_resource type="PackedScene" uid="uid://ceqcxqo62twgj" path="res://scenes/systems/TerrainGenerator.tscn" id="5_p6tqq"]
@@ -13,6 +14,9 @@ position = Vector2(-75, -75)
 jump_force = 300
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="HUD" parent="Player/Camera2D" node_paths=PackedStringArray("player") instance=ExtResource("2_j5s88")]
+player = NodePath("../..")
 
 [node name="TerrainGenerator" parent="." node_paths=PackedStringArray("player_node") instance=ExtResource("5_p6tqq")]
 position = Vector2(-128, -128)
