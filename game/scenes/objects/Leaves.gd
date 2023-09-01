@@ -2,22 +2,24 @@ extends Area2D
 class_name Leaves
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+@onready var sprite = $AnimatedSprite2D
+@export var rodent_chance: float = 0.85
 
+var has_rodent = true
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+	if randf() > rodent_chance:
+		has_rodent = false
+		sprite.play("empty")
+	else:
+		sprite.play("full")
 
 
 func _on_Leaves_body_entered(body: Node):
 	var player := body as Player
-	if player != null:
+	if player != null && has_rodent:
 		player.on_collision(self)
+
+func eat_me():
+	has_rodent = false
+	sprite.play("empty")

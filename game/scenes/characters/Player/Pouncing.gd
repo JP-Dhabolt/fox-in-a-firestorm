@@ -13,4 +13,5 @@ func update(_delta):
 func on_collision(node: Node2D):
 	var leaves := node as Leaves
 	if leaves != null:
+		leaves.eat_me()
 		state_machine.transition_to("Eating")

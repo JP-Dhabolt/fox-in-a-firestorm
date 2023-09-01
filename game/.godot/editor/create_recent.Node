@@ -1,5 +1,7 @@
-Node
+AnimatedSprite2D
 Label
+CanvasLayer
+Node
 Camera2D
 TileMap
 AnimationPlayer

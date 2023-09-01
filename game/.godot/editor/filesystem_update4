@@ -27,3 +27,9 @@ res://scenes/characters/Player/Normal.gd
 res://scenes/characters/Player/Crouching.gd
 res://scenes/characters/Player/Hurting.gd
 res://scenes/characters/Player/Eating.gd
+res://scenes/interface/HUD.gd
+res://scenes/interface/HUD.tscn
+res://scenes/interface/Food.gd
+res://scenes/interface/HUD/HUD.tscn
+res://scenes/systems/Game.gd
+res://scenes/interface/HUD/Food.gd

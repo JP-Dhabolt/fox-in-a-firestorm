@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://ub25a470q2tw"]
+
+[ext_resource type="Script" path="res://scenes/interface/HUD/HUD.gd" id="1_pdqff"]
+[ext_resource type="Script" path="res://scenes/interface/HUD/Food.gd" id="2_o3t81"]
+
+[node name="HUD" type="Node2D"]
+script = ExtResource("1_pdqff")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Food" type="Label" parent="CanvasLayer"]
+offset_left = 279.0
+offset_right = 319.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 8
+text = "Food: 100"
+horizontal_alignment = 2
+script = ExtResource("2_o3t81")
