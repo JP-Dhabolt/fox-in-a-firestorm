@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dsyeewn78c28r"]
+[gd_scene load_steps=7 format=3 uid="uid://dsyeewn78c28r"]
 
 [ext_resource type="PackedScene" uid="uid://cqnuwdbv7t1jm" path="res://scenes/characters/Player/Player.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://ub25a470q2tw" path="res://scenes/interface/HUD/HUD.tscn" id="2_j5s88"]
 [ext_resource type="Resource" uid="uid://bxrhlvm471kb3" path="res://scenes/levels/TestLevel/SpawnableLeaf.tres" id="4_dxeso"]
+[ext_resource type="Resource" uid="uid://ciylhfor8pce6" path="res://scenes/levels/TestLevel/SpawnableBush.tres" id="5_c7lt4"]
 [ext_resource type="PackedScene" uid="uid://g5xdeqs6ky7f" path="res://scenes/interface/MenuModal/MenuModal.tscn" id="5_hsehm"]
 [ext_resource type="PackedScene" uid="uid://ceqcxqo62twgj" path="res://scenes/systems/TerrainGenerator.tscn" id="5_p6tqq"]
 
@@ -21,7 +22,7 @@ player = NodePath("../..")
 [node name="TerrainGenerator" parent="." node_paths=PackedStringArray("player_node") instance=ExtResource("5_p6tqq")]
 position = Vector2(-128, -128)
 player_node = NodePath("../Player")
-spawnable_items = Array[Resource("res://custom_resources/SpawnableItem.gd")]([ExtResource("4_dxeso")])
+spawnable_items = Array[Resource("res://custom_resources/SpawnableItem.gd")]([ExtResource("4_dxeso"), ExtResource("5_c7lt4")])
 
 [node name="MenuModal" parent="." instance=ExtResource("5_hsehm")]
 top_level = true

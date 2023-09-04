@@ -8,8 +8,10 @@ func _ready():
 	assert(state_machine != null, "PlayerState needs to be a child of PlayerStateMachine")
 	state_machine.register_state(self)
 
-func on_collision(_node: Node2D) -> void:
-	pass
+func on_collision(node: Node2D) -> void:
+	var bush := node as Bush
+	if bush != null:
+		state_machine.register_impact()
 
 func on_timeout(_timer: Timer) -> void:
 	pass

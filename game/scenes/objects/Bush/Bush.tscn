@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqxpnx2h0qmof"]
+
+[ext_resource type="Script" path="res://scenes/objects/Bush/Bush.gd" id="1_nytwi"]
+[ext_resource type="Texture2D" uid="uid://d2gistts5ig2x" path="res://sprites/sunnyland_2d_pixel_art_pack/bush-color-modified.png" id="1_wwkum"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j5rnc"]
+size = Vector2(12, 14)
+
+[node name="Bush" type="Area2D"]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_nytwi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-0.440004, -1.48)
+scale = Vector2(0.72, 0.68)
+texture = ExtResource("1_wwkum")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.440004, -0.48)
+shape = SubResource("RectangleShape2D_j5rnc")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

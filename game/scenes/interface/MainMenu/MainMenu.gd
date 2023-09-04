@@ -10,4 +10,4 @@ func _ready():
 	test_level_button.grab_focus()
 
 func _load_test_level():
-	get_tree().change_scene_to_file("res://scenes/levels/TestLevel.tscn")
+	get_tree().change_scene_to_file("res://scenes/levels/TestLevel/TestLevel.tscn")

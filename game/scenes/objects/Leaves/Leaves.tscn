@@ -1,26 +1,26 @@
 [gd_scene load_steps=9 format=3 uid="uid://bbgdrnpmiv3ny"]
 
-[ext_resource type="Script" path="res://scenes/objects/Leaves.gd" id="2"]
-[ext_resource type="Texture2D" uid="uid://bfi8tjy4abfkt" path="res://sprites/sunnyland_tall_forest_environment/Plant-color-modified.png" id="2_trtpr"]
-[ext_resource type="Texture2D" uid="uid://djesyiipacv8a" path="res://sprites/sunnyland_tall_forest_environment/Plant-swaying-modified.png" id="3_6brns"]
+[ext_resource type="Script" path="res://scenes/objects/Leaves/Leaves.gd" id="1_gmtji"]
+[ext_resource type="Texture2D" uid="uid://bfi8tjy4abfkt" path="res://sprites/sunnyland_tall_forest_environment/Plant-color-modified.png" id="2_nhrd6"]
+[ext_resource type="Texture2D" uid="uid://djesyiipacv8a" path="res://sprites/sunnyland_tall_forest_environment/Plant-swaying-modified.png" id="3_2kn5c"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ip8vs"]
-atlas = ExtResource("3_6brns")
+atlas = ExtResource("3_2kn5c")
 region = Rect2(0, 0, 40, 27)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x24ha"]
-atlas = ExtResource("3_6brns")
+atlas = ExtResource("3_2kn5c")
 region = Rect2(45, 0, 40, 27)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0jgvn"]
-atlas = ExtResource("3_6brns")
+atlas = ExtResource("3_2kn5c")
 region = Rect2(90, 0, 40, 27)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_v73on"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_trtpr")
+"texture": ExtResource("2_nhrd6")
 }],
 "loop": true,
 "name": &"empty",
@@ -51,7 +51,7 @@ size = Vector2(38.125, 12)
 position = Vector2(0, -8)
 collision_layer = 8
 collision_mask = 2
-script = ExtResource("2")
+script = ExtResource("1_gmtji")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_v73on")

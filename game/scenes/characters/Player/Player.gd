@@ -4,7 +4,7 @@ class_name Player
 signal collided_with(node: Node2D)
 
 @export var gravity: int = 15
-@export var movement_speed: int = 150
+@export var movement_speed: float = 150.0
 @export var jump_force: int = 200
 @export var pounce_force: int = 50
 @export var food: int = 75
