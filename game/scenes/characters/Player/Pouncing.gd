@@ -15,3 +15,5 @@ func on_collision(node: Node2D):
 	if leaves != null:
 		leaves.eat_me()
 		state_machine.transition_to("Eating")
+	else:
+		super.on_collision(node)

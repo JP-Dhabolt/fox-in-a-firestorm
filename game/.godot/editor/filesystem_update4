@@ -33,3 +33,14 @@ res://scenes/interface/Food.gd
 res://scenes/interface/HUD/HUD.tscn
 res://scenes/systems/Game.gd
 res://scenes/interface/HUD/Food.gd
+res://scenes/objects/Leaves/Leaves.gd
+res://scenes/objects/Bush/Bush.tscn
+res://scenes/objects/Bush/Bush.gd
+res://scenes/levels/TestLevel/SpawnableBush.tres
+res://scenes/levels/TestLevel/TestLevel.tscn
+res://scripts/State.gd
+res://scripts/StateMachine.gd
+res://scripts/PlayerSpeedChange.gd
+res://scenes/objects/Leaves/Leaves.tscn
+res://scenes/interface/MainMenu/MainMenu.gd
+res://scenes/interface/HUD/Speed.gd
