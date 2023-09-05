@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="PlayerStates" load_steps=2 format=3 uid="uid://50usuifygg3t"]
+
+[ext_resource type="Script" path="res://custom_resources/PlayerStates.gd" id="1_4rs71"]
+
+[resource]
+script = ExtResource("1_4rs71")
+normal = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":Resource("res://scenes/characters/Player/States/Normal.gd"))
+
+jumping = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":Resource("res://scenes/characters/Player/States/Jumping.gd"))
+
+pouncing = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":Resource("res://scenes/characters/Player/States/Pouncing.gd"))
+
+eating = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":Resource("res://scenes/characters/Player/States/Eating.gd"),"player_speed_multiplier":0.5,"food_amount":10)
+
+hurting = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":Resource("res://scenes/characters/Player/States/Hurting.gd"))
+
