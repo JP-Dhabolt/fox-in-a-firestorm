@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://bxrhlvm471kb3" path="res://scenes/levels/TestLevel/SpawnableLeaf.tres" id="4_dxeso"]
 [ext_resource type="Resource" uid="uid://ciylhfor8pce6" path="res://scenes/levels/TestLevel/SpawnableBush.tres" id="5_c7lt4"]
 [ext_resource type="PackedScene" uid="uid://g5xdeqs6ky7f" path="res://scenes/interface/MenuModal/MenuModal.tscn" id="5_hsehm"]
-[ext_resource type="PackedScene" uid="uid://ceqcxqo62twgj" path="res://scenes/systems/TerrainGenerator.tscn" id="5_p6tqq"]
+[ext_resource type="PackedScene" uid="uid://ceqcxqo62twgj" path="res://scenes/systems/TerrainGenerator/TerrainGenerator.tscn" id="5_p6tqq"]
 
 [node name="World" type="Node2D"]
 position = Vector2(128, 128)

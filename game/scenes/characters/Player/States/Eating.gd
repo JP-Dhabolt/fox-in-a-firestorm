@@ -4,6 +4,9 @@ var crouch_animation = "Crouch"
 @export var player_speed_multiplier = 0.5
 @export var food_amount = 10
 
+func _get_state_name() -> String:
+	return "Eating"
+
 func enter(_previous_state):
 	state_machine.player.sprite.play(crouch_animation)
 	state_machine.start_eat_timer()
@@ -12,4 +15,4 @@ func enter(_previous_state):
 
 func on_timeout(timer: Timer):
 	if timer.name == "EatTimer":
-		state_machine.transition_to("Normal")
+		state_machine.transition_to(state_machine.states.normal)

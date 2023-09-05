@@ -1,12 +1,13 @@
 extends State
 class_name PlayerState
 
-var state_machine: PlayerStateMachine
+var state_machine: PlayerStateMachine:
+	set(p_state_machine):
+		state_machine = p_state_machine
+var state_name: String = "OverrideInSubclass": get = _get_state_name
 
-func _ready():
-	state_machine = get_parent() as PlayerStateMachine
-	assert(state_machine != null, "PlayerState needs to be a child of PlayerStateMachine")
-	state_machine.register_state(self)
+func _get_state_name() -> String:
+	return state_name
 
 func on_collision(node: Node2D) -> void:
 	var bush := node as Bush

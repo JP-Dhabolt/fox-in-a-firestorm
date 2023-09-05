@@ -1,26 +1,45 @@
-extends StateMachine
+extends Node
 class_name PlayerStateMachine
 
 
+@export_group("Setup")
+@export var player: Player
+@export var states: PlayerStates
+
+@export_group("Timers")
 @export var eat_timer: Timer
 @export var hurt_timer: Timer
+
+@export_group("Physics")
 @export var impact_slowdown_amount: float = 0.9
 @export var impact_slowdown_time: float = 6.0
 
-var player: Player
+var current_state: PlayerState
+var previous_state: PlayerState
 var _player_speed_changes: Array[PlayerSpeedChange] = []
 var _elapsed_time: float = 0.0
 
 func _ready():
-	await owner.ready
-	player = owner as Player
-	assert(player != null, "PlayerStateMachine needs to be owned by Player node")
-	super._ready()
+	states.register_all(self)
+	current_state = states.normal
+	current_state.enter(null)
 
 func _process(delta):
 	_elapsed_time += delta
 	_handle_basic_movement()
-	super._process(delta)
+	current_state.update(delta)
+
+func _physics_process(delta):
+	current_state.update_physics(delta)
+
+func transition_to(state: PlayerState):
+	if current_state:
+		current_state.exit()
+
+	previous_state = current_state
+
+	current_state = state
+	current_state.enter(previous_state)
 
 func start_hurt_timer():
 	hurt_timer.start()
