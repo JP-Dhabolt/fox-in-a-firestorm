@@ -7,16 +7,14 @@ func _get_state_name() -> String:
 
 func enter(_previous_state):
 	state_machine.player.sprite.play(pounceAnimation)
-	state_machine.player.velocity.y += state_machine.player.pounce_force
+	state_machine.player.velocity.y += state_machine.pounce_force
 
 func update(_delta):
 	if state_machine.player.is_on_floor():
 		state_machine.transition_to(state_machine.states.hurting)
 
 func on_collision(node: Node2D):
-	var leaves := node as Leaves
-	if leaves != null:
-		leaves.eat_me()
-		state_machine.transition_to(state_machine.states.eating)
-	else:
-		super.on_collision(node)
+	if node.has_method("eat_me"):
+		if node.eat_me():
+			state_machine.transition_to(state_machine.states.eating)
+	super.on_collision(node)

@@ -14,12 +14,10 @@ func _ready():
 	else:
 		sprite.play("full")
 
-
-func _on_Leaves_body_entered(body: Node):
-	var player := body as Player
-	if player != null && has_rodent:
-		player.on_collision(self)
-
 func eat_me():
-	has_rodent = false
-	sprite.play("empty")
+	if has_rodent:
+		has_rodent = false
+		sprite.play("empty")
+		return true
+
+	return false

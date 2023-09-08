@@ -16,3 +16,11 @@ func on_timeout(timer: Timer):
 
 func movement_allowed():
 	return false
+
+func on_collision(node: Node2D):
+	# If we've collided with an edible node while hurting, it was because
+	# we processed the ground hit first. Player should be allowed to eat.
+	if node.has_method("eat_me"):
+		if node.eat_me():
+			state_machine.transition_to(state_machine.states.eating)
+	super.on_collision(node)

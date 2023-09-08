@@ -1,3 +1,4 @@
+@tool
 extends Node2D
 
 @onready var tilemap := $TileMap as TileMap
@@ -13,16 +14,33 @@ var instance_dict: Dictionary = {}
 
 var max_x: int
 var min_x: int = 0
-var max_y: int
+var max_y: int = 12
 var min_y: int
+var water_height: int
+
+const LAYERS = {
+	"GROUND": 0,
+	"WATER": 1
+}
+const TERRAIN_SETS = {
+	"GROUND": 0,
+	"WATER": 1
+}
+const TERRAINS = {
+	"GROUND": 0,
+	"WATER": 0
+}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	tilemap.clear()
 	fast_noise = NoiseForTerrain.get_noise_by_type(NoiseForTerrain.NoiseForTerrainType.INITIAL)
 	var viewport_rect = get_viewport_rect()
 	max_x = ceil(viewport_rect.size.x / 16)
-	max_y = ceil(viewport_rect.size.y / 16)
+	if not Engine.is_editor_hint():
+		max_y = ceil(viewport_rect.size.y / 16)
 	min_y = ceil(max_y / 3.0)
+	water_height = min_y * 2
 	for x in range(min_x, max_x + 5):
 		_place_tile(x)
 	_draw_left_boundary()
@@ -38,8 +56,9 @@ func _verify_spawnable_items():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	var player_node_x = tilemap.local_to_map(player_node.global_position).x
-	_draw_and_clear_map(player_node_x)
+	if not Engine.is_editor_hint():
+		var player_node_x = tilemap.local_to_map(player_node.global_position).x
+		_draw_and_clear_map(player_node_x)
 
 func _draw_and_clear_map(player_x: int):
 	_draw_right_if_needed(player_x)
@@ -74,12 +93,15 @@ func _clear_left_if_needed(player_x: int):
 func _place_tile(x: int):
 	var y_val = _determine_y_value(x)
 	var vectors = range(y_val, max_y).map(func(y): return Vector2i(x, y))
-	tilemap.set_cells_terrain_connect(0, vectors, 0, 0)
+	tilemap.set_cells_terrain_connect(LAYERS.GROUND, vectors, TERRAIN_SETS.GROUND, TERRAINS.GROUND)
+	if y_val > water_height:
+		var water_vectors = range(water_height, y_val).map(func(y): return Vector2i(x, y))
+		tilemap.set_cells_terrain_connect(LAYERS.WATER, water_vectors, TERRAIN_SETS.WATER, TERRAINS.WATER)
 	_place_objects(x, y_val)
 
 func _draw_left_boundary():
 	var vectors = range(0, max_y).map(func(y): return Vector2i(-1, y))
-	tilemap.set_cells_terrain_connect(0, vectors, 0, 0)
+	tilemap.set_cells_terrain_connect(LAYERS.GROUND, vectors, TERRAIN_SETS.GROUND, TERRAINS.GROUND)
 
 func _place_objects(x: int, y: int):
 	rng.seed = x
@@ -96,7 +118,7 @@ func _place_objects(x: int, y: int):
 
 func _erase_tile(x: int):
 	for y in range(min_y, max_y):
-		tilemap.erase_cell(0, Vector2i(x, y))
+		tilemap.erase_cell(LAYERS.GROUND, Vector2i(x, y))
 	_erase_object(x)
 
 func _erase_object(x: int):

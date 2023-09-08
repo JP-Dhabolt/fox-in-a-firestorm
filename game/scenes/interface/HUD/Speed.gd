@@ -7,4 +7,4 @@ func _ready():
 	assert(player != null, "Player must be available to use this node")
 
 func _process(_delta):
-	text = "Speed: " + str(int(player.movement_speed))
+	text = "Speed: " + str(int(player.state_machine.movement_speed))

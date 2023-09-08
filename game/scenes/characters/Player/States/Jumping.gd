@@ -6,7 +6,7 @@ func _get_state_name() -> String:
 	return "Jumping"
 
 func enter(_previous_state: State) -> void:
-	state_machine.player.velocity.y = -state_machine.player.jump_force
+	state_machine.player.velocity.y = -state_machine.jump_force
 	state_machine.player.sprite.play(jump_animation)
 
 func update(_delta):

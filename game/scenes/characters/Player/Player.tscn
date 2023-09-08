@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cqnuwdbv7t1jm"]
+[gd_scene load_steps=36 format=3 uid="uid://cqnuwdbv7t1jm"]
 
 [ext_resource type="Script" path="res://scenes/characters/Player/Player.gd" id="1_8se2n"]
 [ext_resource type="Texture2D" uid="uid://c5upg24ex5omp" path="res://sprites/sunnyland_2d_pixel_art_pack/player_crouch.png" id="2_ljqyf"]
@@ -171,10 +171,12 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="6"]
 size = Vector2(7.75, 18)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_elfbv"]
+size = Vector2(8, 15)
+
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(-10, -11)
 collision_layer = 2
-collision_mask = 9
 script = ExtResource("1_8se2n")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -224,6 +226,15 @@ horizontal_alignment = 1
 script = ExtResource("10_81ayk")
 state_machine = NodePath("../PlayerStateMachine")
 
-[connection signal="collided_with" from="." to="PlayerStateMachine" method="_on_player_collided_with"]
+[node name="Collider" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 60
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collider"]
+position = Vector2(10, 12.5)
+shape = SubResource("RectangleShape2D_elfbv")
+
 [connection signal="timeout" from="HurtTimer" to="PlayerStateMachine" method="_on_hurt_timer_timeout"]
 [connection signal="timeout" from="EatTimer" to="PlayerStateMachine" method="_on_eat_timer_timeout"]
+[connection signal="area_entered" from="Collider" to="PlayerStateMachine" method="_on_collider_entered"]
+[connection signal="body_entered" from="Collider" to="PlayerStateMachine" method="_on_collider_entered"]

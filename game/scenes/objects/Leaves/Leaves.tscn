@@ -50,7 +50,7 @@ size = Vector2(38.125, 12)
 [node name="Leaves" type="Area2D"]
 position = Vector2(0, -8)
 collision_layer = 8
-collision_mask = 2
+collision_mask = 64
 script = ExtResource("1_gmtji")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

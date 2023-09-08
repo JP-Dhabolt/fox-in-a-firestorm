@@ -1,12 +1,12 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1693877050
+::res://::1694044354
 .gutconfig.json::JSON::-1::1692232879::0::1::::<><>::
 .gut_editor_config.json::JSON::-1::1692232879::0::1::::<><>::
 .gut_editor_shortcuts.cfg::TextFile::-1::1692232879::0::1::::<><>::
 asset_lib_icon.png::CompressedTexture2D::6400985268008975504::1692232879::1692232879::1::::<><>::
 BigFont.tres::FontFile::-1::1692232879::0::1::::<><>::
 BigFontTheme.tres::Theme::-1::1692232879::0::1::::<><>::res://BigFont.tres
-default_env.tres::Environment::399509453262558332::1693876902::0::1::::<><>::
+default_env.tres::Environment::399509453262558332::1694044165::0::1::::<><>::
 export_presets.cfg::TextFile::-1::1692232879::0::1::::<><>::
 gut_panel.png::CompressedTexture2D::8182079554925886730::1692232879::1692232879::1::::<><>::
 icon.png::CompressedTexture2D::6993518893836185739::1692232879::1692232879::1::::<><>::
@@ -115,7 +115,7 @@ SpawnableItem.gd::GDScript::-1::1693008931::0::1::::SpawnableItem<>Resource<>::
 ::res://scenes/characters/::1693354689
 ::res://scenes/characters/Player/::1693876902
 Player.gd::GDScript::-1::1693841369::0::1::::Player<>CharacterBody2D<>::
-Player.tscn::PackedScene::5923953563831272990::1693876902::0::1::::<><>::res://scenes/characters/Player/Player.gd<>uid://c5upg24ex5omp::::res://sprites/sunnyland_2d_pixel_art_pack/player_crouch.png<>uid://c23x5hw2rwwn::::res://sprites/sunnyland_2d_pixel_art_pack/player_hurt.png<>uid://bppodbe3b7mgl::::res://sprites/sunnyland_2d_pixel_art_pack/player_idle.png<>uid://dnbklxexk06r5::::res://sprites/sunnyland_2d_pixel_art_pack/player_jump.png<>uid://bsnk3mgsa6nwk::::res://sprites/sunnyland_2d_pixel_art_pack/player_pounce.png<>uid://djxtqoq5emvb7::::res://sprites/sunnyland_2d_pixel_art_pack/player_run.png<>uid://bjr754j6go216::::res://scenes/systems/PlayerStateMachine/PlayerStateMachine.tscn<>uid://50usuifygg3t::::res://scenes/characters/Player/States/StandardPlayerStates.tres<>res://scenes/characters/Player/StateLabel.gd<>res://scenes/characters/Player/States/Normal.gd<>res://scenes/characters/Player/States/Eating.gd<>res://scenes/characters/Player/States/Hurting.gd<>res://scenes/characters/Player/States/Pouncing.gd<>res://scenes/characters/Player/States/Jumping.gd
+Player.tscn::PackedScene::5923953563831272990::1693876902::0::1::::<><>::res://scenes/characters/Player/Player.gd<>uid://c5upg24ex5omp
 StateLabel.gd::GDScript::-1::1693876282::0::1::::<>Label<>::
 ::res://scenes/characters/Player/States/::1693875927
 Eating.gd::GDScript::-1::1693876638::0::1::::<>PlayerState<>::
@@ -142,7 +142,7 @@ Main.tscn::PackedScene::6340732407136388788::1693524980::0::1::::<><>::uid://b2n
 ::res://scenes/levels/TestLevel/::1693876902
 SpawnableBush.tres::Resource/Resource::5384577855126767063::1693615719::0::1::::<><>::res://custom_resources/SpawnableItem.gd<>uid://cqxpnx2h0qmof
 SpawnableLeaf.tres::Resource/Resource::4036304294758610774::1693614586::0::1::::<><>::res://custom_resources/SpawnableItem.gd<>uid://bbgdrnpmiv3ny
-TestLevel.tscn::PackedScene::8472457490902310335::1693876902::0::1::::<><>::uid://cqnuwdbv7t1jm::::res://scenes/characters/Player/Player.tscn<>uid://ub25a470q2tw::::res://scenes/interface/HUD/HUD.tscn<>uid://bxrhlvm471kb3::::res://scenes/levels/TestLevel/SpawnableLeaf.tres<>uid://ciylhfor8pce6::::res://scenes/levels/TestLevel/SpawnableBush.tres<>uid://g5xdeqs6ky7f::::res://scenes/interface/MenuModal/MenuModal.tscn<>uid://ceqcxqo62twgj::::res://scenes/systems/TerrainGenerator/TerrainGenerator.tscn
+TestLevel.tscn::PackedScene::8472457490902310335::1693876902::0::1::::<><>::uid://cqnuwdbv7t1jm
 ::res://scenes/objects/::1693614594
 ::res://scenes/objects/Bush/::1693841438
 Bush.gd::GDScript::-1::1693617561::0::1::::Bush<>Area2D<>::
@@ -155,9 +155,9 @@ Leaves.tscn::PackedScene::2469209009862566826::1693841438::0::1::::<><>::res://s
 PlayerState.gd::GDScript::-1::1693876628::0::1::::PlayerState<>State<>::
 PlayerStateMachine.gd::GDScript::-1::1693875694::0::1::::PlayerStateMachine<>Node<>::
 PlayerStateMachine.tscn::PackedScene::3055212754337574895::1693875874::0::1::::<><>::res://scenes/systems/PlayerStateMachine/PlayerStateMachine.gd
-::res://scenes/systems/TerrainGenerator/::1693875856
-TerrainGenerator.gd::GDScript::-1::1693267521::0::1::::<>Node2D<>::
-TerrainGenerator.tscn::PackedScene::5086790156694849365::1693875856::0::1::::<><>::res://scenes/systems/TerrainGenerator/TerrainGenerator.gd<>uid://gqsnjo7oejik
+::res://scenes/systems/TerrainGenerator/::1694044165
+TerrainGenerator.gd::GDScript::-1::1694044243::0::1::::<>Node2D<>::
+TerrainGenerator.tscn::PackedScene::5086790156694849365::1694044165::0::1::::<><>::res://scenes/systems/TerrainGenerator/TerrainGenerator.gd<>uid://gqsnjo7oejik::::res://sprites/sunnyland_2d_pixel_art_pack/tileset-modified.png
 ::res://scripts/::1693875754
 NoiseForTerrain.gd::GDScript::-1::1693271002::0::1::::NoiseForTerrain<>Node<>::
 PlayerSpeedChange.gd::GDScript::-1::1693616645::0::1::::PlayerSpeedChange<>Object<>::
