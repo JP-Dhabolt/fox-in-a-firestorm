@@ -21,13 +21,18 @@ class_name PlayerStates
 	set(p_hurting):
 		hurting = p_hurting
 
+@export var swimming: PlayerState:
+	set(p_swimming):
+		swimming = p_swimming
+
 func register_all(state_machine: PlayerStateMachine):
 	var _states: Array[PlayerState] = [
 		normal,
 		jumping,
 		pouncing,
 		eating,
-		hurting
+		hurting,
+		swimming
 	]
 	for state in _states:
 		state.state_machine = state_machine

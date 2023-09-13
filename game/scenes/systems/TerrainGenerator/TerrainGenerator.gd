@@ -1,5 +1,6 @@
 @tool
 extends Node2D
+class_name TerrainGenerator
 
 @onready var tilemap := $TileMap as TileMap
 @export var player_node: Node2D
@@ -97,7 +98,8 @@ func _place_tile(x: int):
 	if y_val > water_height:
 		var water_vectors = range(water_height, y_val).map(func(y): return Vector2i(x, y))
 		tilemap.set_cells_terrain_connect(LAYERS.WATER, water_vectors, TERRAIN_SETS.WATER, TERRAINS.WATER)
-	_place_objects(x, y_val)
+	else:
+		_place_objects(x, y_val)
 
 func _draw_left_boundary():
 	var vectors = range(0, max_y).map(func(y): return Vector2i(-1, y))
@@ -141,12 +143,5 @@ func redraw_terrain():
 
 func randomize_terrain():
 	fast_noise = NoiseForTerrain.get_noise_by_type(NoiseForTerrain.NoiseForTerrainType.RANDOM)
-	print_object_properties(fast_noise)
+	Utilities.print_object_properties(fast_noise)
 	redraw_terrain()
-
-func print_object_properties(obj):
-	var prop_list = obj.get_property_list()
-	for prop in prop_list:
-		var prop_name = prop.name
-		var prop_value = obj.get(prop_name)
-		print(prop_name + ": " + str(prop_value))

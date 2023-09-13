@@ -14,7 +14,7 @@ func update(_delta):
 		state_machine.transition_to(state_machine.states.hurting)
 
 func on_collision(node: Node2D):
-	if node.has_method("eat_me"):
+	if IEdible.implements(node):
 		if node.eat_me():
 			state_machine.transition_to(state_machine.states.eating)
 	super.on_collision(node)

@@ -14,7 +14,7 @@ func _get_gravity_modifier() -> float:
 	return gravity_modifier
 
 func on_collision(node: Node2D) -> void:
-	if node.has_method("determine_slowdown"):
+	if ISlowable.implements(node):
 		var slowdown = node.determine_slowdown()
 		state_machine.change_player_speed(slowdown.multiplier, slowdown.time)
 

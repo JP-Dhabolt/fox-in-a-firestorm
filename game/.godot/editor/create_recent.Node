@@ -1,8 +1,8 @@
+Label
+PlayerState
 CollisionShape2D
 Area2D
-PlayerState
 Node
-Label
 Sprite2D
 AnimatedSprite2D
 CanvasLayer

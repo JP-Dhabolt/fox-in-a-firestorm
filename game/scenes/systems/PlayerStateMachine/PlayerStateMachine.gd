@@ -14,6 +14,7 @@ class_name PlayerStateMachine
 @export var gravity: float = 15.0
 @export var movement_speed: float = 150.0
 @export var jump_force: int = 300
+@export var underwater_jump_force: int = 100
 @export var pounce_force: int = 50
 
 var current_state: PlayerState
@@ -79,3 +80,9 @@ func _on_eat_timer_timeout():
 
 func _on_collider_entered(body: Node2D):
 	current_state.on_collision(body)
+
+func _on_collider_entered_water():
+	transition_to(states.swimming)
+
+func _on_collider_left_water():
+	transition_to(states.jumping)
