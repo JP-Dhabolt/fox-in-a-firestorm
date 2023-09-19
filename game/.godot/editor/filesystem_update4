@@ -1,3 +1,5 @@
-res://scenes/interface/HUD/HUD.gd
-res://scenes/interface/HUD/LocLabel.gd
-res://scenes/characters/Player/Collider.gd
+res://default_env.tres
+res://scenes/systems/TerrainGenerator/Water.tscn
+res://scenes/systems/TerrainGenerator/Water.gdshader
+res://scenes/systems/TerrainGenerator/Water.gd
+res://scenes/systems/TerrainGenerator/Waterline.gd

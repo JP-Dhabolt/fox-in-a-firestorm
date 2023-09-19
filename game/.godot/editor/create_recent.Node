@@ -1,9 +1,10 @@
+Line2D
+Sprite2D
 Label
 PlayerState
 CollisionShape2D
 Area2D
 Node
-Sprite2D
 AnimatedSprite2D
 CanvasLayer
 Camera2D
