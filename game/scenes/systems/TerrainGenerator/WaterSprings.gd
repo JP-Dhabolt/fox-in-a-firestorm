@@ -1,5 +1,5 @@
 extends Object
-class_name Waterline
+class_name WaterSprings
 
 var desired_height: float
 var distance_between: float = 1.5

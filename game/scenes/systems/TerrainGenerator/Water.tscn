@@ -8,4 +8,5 @@ script = ExtResource("1_1gobh")
 
 [node name="WaterBody" type="Polygon2D" parent="."]
 color = Color(0.309804, 0.537255, 0.835294, 1)
+antialiased = true
 script = ExtResource("3_bqatc")
