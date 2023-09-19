@@ -1,14 +1,18 @@
 extends Node2D
 
-# Hooke's Law is F = -k * x where F is the force, k is the spring constant, and x is the displacement of the spring from its rest position.
-# Loss = -d * v where d is the damping constant and v is the velocity of the spring.
-# Displacement of adjectent nodes is xAdj = x * r where r is the radiating constant.
+@onready var water_body: WaterBody = $WaterBody
+@export var distance_between_points: float = 5
 
-# Called when the node enters the scene tree for the first time.
+var water_line: Waterline
+
 func _ready():
-	pass # Replace with function body.
+	var screensize := get_viewport().get_visible_rect().size
+	var desired_height := screensize.y / 2
+	water_line = Waterline.new(0, screensize.x, desired_height, distance_between_points)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func _physics_process(_delta):
+	water_line.process_waves()
+	water_body.draw_water(water_line.points)
+	if Input.is_action_just_pressed("jump"):
+		var local_pos := get_local_mouse_position()
+		water_line.trigger_waves(local_pos, local_pos.y * 0.1)

@@ -3,3 +3,4 @@ res://scenes/systems/TerrainGenerator/Water.tscn
 res://scenes/systems/TerrainGenerator/Water.gdshader
 res://scenes/systems/TerrainGenerator/Water.gd
 res://scenes/systems/TerrainGenerator/Waterline.gd
+res://scenes/systems/TerrainGenerator/WaterBody.gd
