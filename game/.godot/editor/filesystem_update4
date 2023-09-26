@@ -7,3 +7,4 @@ res://scenes/characters/Player/Collider.gd
 res://scenes/characters/Player/Player.tscn
 res://scenes/systems/Water/Water.tscn
 res://scenes/systems/TerrainGenerator/TerrainGenerator.tscn
+res://scenes/systems/TerrainGenerator/TerrainGenerator.gd

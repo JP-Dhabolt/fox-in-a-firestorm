@@ -23,6 +23,7 @@ var instance_dict: Dictionary = {}
 var max_x: int
 var min_x: int = 0
 var max_y: int = 12
+var depth: int = 36
 var min_y: int
 var water_height_in_tiles: int
 var water_needs_redrawn: bool = true
@@ -106,12 +107,12 @@ func _redraw_water_if_needed():
 		water_needs_redrawn = false
 		var water_start := (earliest_x_drawn - max_x) * TILE_HEIGHT_IN_PIXELS
 		var water_end := latest_x_drawn * TILE_HEIGHT_IN_PIXELS
-		var water_height := water_height_in_tiles * TILE_HEIGHT_IN_PIXELS
+		var water_height := water_height_in_tiles * TILE_HEIGHT_IN_PIXELS + int(float(TILE_HEIGHT_IN_PIXELS) / 4)
 		water.setup_waterline(water_start, water_end, water_height)
 
 func _place_tile(x: int):
 	var y_val = _determine_y_value(x)
-	var vectors = range(y_val, max_y).map(func(y): return Vector2i(x, y))
+	var vectors = range(y_val, depth).map(func(y): return Vector2i(x, y))
 	tilemap.set_cells_terrain_connect(LAYERS.GROUND, vectors, TERRAIN_SETS.GROUND, TERRAINS.GROUND)
 	if y_val <= water_height_in_tiles:
 		_place_objects(x, y_val)
