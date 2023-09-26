@@ -1,11 +1,9 @@
+res://scenes/characters/Player/Player.gd
+res://scenes/systems/PlayerStateMachine/PlayerStateMachine.gd
 res://default_env.tres
-res://scenes/systems/Water/Water.tscn
-res://scenes/systems/TerrainGenerator/Water.gdshader
 res://scenes/levels/TestLevel/TestLevel.tscn
-res://scenes/systems/TerrainGenerator/TerrainGenerator.tscn
-res://scenes/systems/Water/Water.gd
+res://scenes/systems/TerrainGenerator/Water.gdshader
 res://scenes/characters/Player/Collider.gd
 res://scenes/characters/Player/Player.tscn
-res://scenes/systems/Water/WaterBody.gd
-res://scenes/systems/Water/WaterSprings.gd
-res://scenes/systems/TerrainGenerator/TerrainGenerator.gd
+res://scenes/systems/Water/Water.tscn
+res://scenes/systems/TerrainGenerator/TerrainGenerator.tscn

@@ -18,3 +18,12 @@ func _process(delta: float):
 
 func eat(amount: int):
 	food = min(100, food + amount)
+
+
+func _on_terrain_generator_entered_water(body: Node2D):
+	if body is Player:
+		state_machine.transition_to(state_machine.states.swimming)
+
+func _on_terrain_generator_exited_water(body: Node2D):
+	if body is Player:
+		state_machine.transition_to(state_machine.states.jumping)

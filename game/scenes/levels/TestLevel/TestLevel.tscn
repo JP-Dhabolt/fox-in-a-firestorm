@@ -31,8 +31,5 @@ offset_top = 95.0
 offset_right = -162.0
 offset_bottom = -85.0
 
-[connection signal="body_entered" from="TerrainGenerator/Leaves" to="TerrainGenerator/Leaves" method="_on_Leaves_body_entered" flags=18]
-[connection signal="body_entered" from="TerrainGenerator/@Area2D@61164" to="TerrainGenerator/@Area2D@61164" method="_on_Leaves_body_entered" flags=18]
-[connection signal="body_entered" from="TerrainGenerator/@Area2D@61166" to="TerrainGenerator/@Area2D@61166" method="_on_Leaves_body_entered" flags=18]
-[connection signal="body_entered" from="TerrainGenerator/@Area2D@61171" to="TerrainGenerator/@Area2D@61171" method="_on_Leaves_body_entered" flags=18]
-[connection signal="body_entered" from="TerrainGenerator/@Area2D@61174" to="TerrainGenerator/@Area2D@61174" method="_on_Leaves_body_entered" flags=18]
+[connection signal="entered_water" from="TerrainGenerator" to="Player" method="_on_terrain_generator_entered_water"]
+[connection signal="exited_water" from="TerrainGenerator" to="Player" method="_on_terrain_generator_exited_water"]

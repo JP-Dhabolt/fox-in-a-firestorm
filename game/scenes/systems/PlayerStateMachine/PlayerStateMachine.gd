@@ -80,9 +80,3 @@ func _on_eat_timer_timeout():
 
 func _on_collider_entered(body: Node2D):
 	current_state.on_collision(body)
-
-func _on_collider_entered_water():
-	transition_to(states.swimming)
-
-func _on_collider_left_water():
-	transition_to(states.jumping)
