@@ -1,11 +1,12 @@
+CollisionShape2D
+Area2D
+CollisionPolygon2D
 Path2D
 Polygon2D
 Line2D
 Sprite2D
 Label
 PlayerState
-CollisionShape2D
-Area2D
 Node
 AnimatedSprite2D
 CanvasLayer
