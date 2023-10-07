@@ -8,6 +8,8 @@ class_name WaterBody
 
 func _ready():
 	polygon = PackedVector2Array()
+	_zoom_changed()
+	_on_item_rect_changed()
 
 func draw_water(points: PackedVector2Array, depth: float):
 	var water_body = _determine_curve(points, control_point_distance)
@@ -33,3 +35,10 @@ func _determine_curve(input: PackedVector2Array, dist: float) -> PackedVector2Ar
 	curve.add_point(input[-1], - end_dir * dist, end_dir * dist)
 
 	return curve.get_baked_points()
+
+
+func _on_item_rect_changed():
+	material.set_shader_parameter("scale", scale)
+
+func _zoom_changed():
+	material.set_shader_parameter("y_zoom", get_viewport_transform().get_scale().y)

@@ -11,7 +11,7 @@
 position = Vector2(128, 128)
 
 [node name="Player" parent="." instance=ExtResource("2")]
-position = Vector2(-75, -75)
+position = Vector2(-80, -80)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 
@@ -33,3 +33,7 @@ offset_bottom = -85.0
 
 [connection signal="entered_water" from="TerrainGenerator" to="Player" method="_on_terrain_generator_entered_water"]
 [connection signal="exited_water" from="TerrainGenerator" to="Player" method="_on_terrain_generator_exited_water"]
+[connection signal="body_entered" from="TerrainGenerator/Leaves" to="TerrainGenerator/Leaves" method="_on_Leaves_body_entered" flags=18]
+[connection signal="body_entered" from="TerrainGenerator/@Area2D@73812" to="TerrainGenerator/@Area2D@73812" method="_on_Leaves_body_entered" flags=18]
+[connection signal="body_entered" from="TerrainGenerator/@Area2D@73815" to="TerrainGenerator/@Area2D@73815" method="_on_Leaves_body_entered" flags=18]
+[connection signal="body_entered" from="TerrainGenerator/@Area2D@73819" to="TerrainGenerator/@Area2D@73819" method="_on_Leaves_body_entered" flags=18]
