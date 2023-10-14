@@ -21,11 +21,11 @@ noise = SubResource("FastNoiseLite_drbo1")
 shader = ExtResource("4_ym8dd")
 shader_parameter/scale = Vector2(2.20215, 1.10938)
 shader_parameter/y_zoom = 4.75683
-shader_parameter/water_color = Color(0.270588, 0.670588, 0.792157, 0.686275)
-shader_parameter/distortion_scale = Vector2(0.805, 0.18)
-shader_parameter/distortion_intensity = 0.014
-shader_parameter/time_scale = 0.15
-shader_parameter/water_transparency = 0.604
+shader_parameter/water_color = Color(0.31, 0.71, 0.78, 0.71)
+shader_parameter/distortion_scale = Vector2(0.29, 0.65)
+shader_parameter/distortion_intensity = 0.02
+shader_parameter/time_scale = 0.09
+shader_parameter/water_transparency = 0.824
 shader_parameter/noise = SubResource("NoiseTexture2D_cy2y1")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ea8do"]
@@ -37,13 +37,14 @@ noise = SubResource("FastNoiseLite_ea8do")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_68c5k"]
 shader = ExtResource("7_db4li")
-shader_parameter/scale = Vector2(1, 0.11)
+shader_parameter/scale = Vector2(0.43, 0.84)
+shader_parameter/offset = Vector2(2.1, 0.66)
 shader_parameter/y_zoom = 4.75683
-shader_parameter/water_color = Color(0.568627, 0.709804, 1, 0)
-shader_parameter/distortion_scale = Vector2(0.295, 0.655)
-shader_parameter/distortion_intensity = 0.019
-shader_parameter/time_scale = 0.089
-shader_parameter/water_transparency = 1.0
+shader_parameter/water_color = Color(0.31, 0.71, 0.78, 0.71)
+shader_parameter/distortion_scale = Vector2(0.29, 0.65)
+shader_parameter/distortion_intensity = 0.02
+shader_parameter/time_scale = 0.09
+shader_parameter/water_transparency = 0.824
 shader_parameter/noise = SubResource("NoiseTexture2D_v7hpi")
 
 [node name="Node2D" type="Node2D"]
@@ -63,7 +64,7 @@ color = Color(0.662745, 0.509804, 0.662745, 1)
 polygon = PackedVector2Array(-1, -1, 126, -14, 175, 25, 133, 46, 12, 44)
 
 [node name="Player" parent="." instance=ExtResource("1_1t5xb")]
-position = Vector2(193, 27)
+position = Vector2(199, 24)
 
 [node name="Bush" parent="." instance=ExtResource("2_y0351")]
 position = Vector2(38, 36)

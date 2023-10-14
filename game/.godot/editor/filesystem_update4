@@ -1,13 +1,7 @@
-res://TestWater.gd
 res://default_env.tres
-res://TestWaterShader.tscn
-res://shaders/Water.gdshader
 res://scenes/systems/TerrainGenerator/TerrainGenerator.tscn
+res://shaders/Water.gdshader
+res://shaders/PolygonWater.gdshader
 res://scenes/levels/TestLevel/TestLevel.tscn
 res://scenes/systems/Water/Water.tscn
-res://scenes/systems/Water/WaterBody.gd
-res://TestShader.gdshader
 res://tests/shaders/TestWaterShader.tscn
-res://tests/shaders/WaterPolygon.gd
-res://tests/shaders/TestWater.gd
-res://shaders/PolygonWater.gdshader

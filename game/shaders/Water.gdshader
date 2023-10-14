@@ -4,13 +4,13 @@ uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
 uniform vec2 scale = vec2(0.43, 0.17);
 uniform float y_zoom = 4.7;
 
-uniform vec4 water_color : source_color = vec4(0.56, 0.7, 1.0, 0.6);
+uniform vec4 water_color : source_color = vec4(0.31, 0.71, 0.78, 0.71);
 
 uniform sampler2D noise : repeat_enable;
 uniform vec2 distortion_scale = vec2(0.29, 0.65);
 uniform float distortion_intensity : hint_range(0, 0.1) = 0.02;
 uniform float time_scale : hint_range(0, 1) = 0.09;
-uniform float water_transparency : hint_range(0, 1) = 0.475;
+uniform float water_transparency : hint_range(0, 1) = 0.824;
 
 void fragment() {
 	float distortion = texture(noise, UV * scale * distortion_scale + TIME * time_scale).x;
