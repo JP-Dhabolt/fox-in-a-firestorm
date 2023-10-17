@@ -1,3 +1,4 @@
+Label
 Polygon2D
 Sprite2D
 CollisionShape2D
@@ -5,7 +6,6 @@ Area2D
 CollisionPolygon2D
 Path2D
 Line2D
-Label
 PlayerState
 Node
 AnimatedSprite2D

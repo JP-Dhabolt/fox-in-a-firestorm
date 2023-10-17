@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://ub25a470q2tw"]
+[gd_scene load_steps=6 format=3 uid="uid://ub25a470q2tw"]
 
 [ext_resource type="Script" path="res://scenes/interface/HUD/HUD.gd" id="1_pdqff"]
 [ext_resource type="Script" path="res://scenes/interface/HUD/Food.gd" id="2_o3t81"]
 [ext_resource type="Script" path="res://scenes/interface/HUD/Speed.gd" id="3_780r7"]
 [ext_resource type="Script" path="res://scenes/interface/HUD/LocLabel.gd" id="4_80ii1"]
+[ext_resource type="Script" path="res://scenes/interface/HUD/HeatLabel.gd" id="5_tbadt"]
 
 [node name="HUD" type="Node2D"]
 script = ExtResource("1_pdqff")
@@ -34,3 +35,14 @@ theme_override_font_sizes/font_size = 8
 text = "Loc: 0, 0"
 vertical_alignment = 2
 script = ExtResource("4_80ii1")
+
+[node name="HeatLabel" type="Label" parent="CanvasLayer"]
+offset_left = 279.0
+offset_top = 157.0
+offset_right = 319.0
+offset_bottom = 180.0
+theme_override_font_sizes/font_size = 8
+text = "Heat: 50"
+horizontal_alignment = 2
+vertical_alignment = 2
+script = ExtResource("5_tbadt")

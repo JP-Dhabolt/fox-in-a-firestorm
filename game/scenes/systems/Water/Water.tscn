@@ -14,9 +14,9 @@ noise = SubResource("FastNoiseLite_wqp33")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ylo26"]
 shader = ExtResource("2_l2fyl")
-shader_parameter/scale = Vector2(0.43, 0.84)
+shader_parameter/scale = Vector2(1, 1)
 shader_parameter/offset = Vector2(2.165, 0.165)
-shader_parameter/y_zoom = 4.75683
+shader_parameter/y_zoom = 1.0
 shader_parameter/water_color = Color(0.31, 0.71, 0.78, 0.71)
 shader_parameter/distortion_scale = Vector2(0.29, 0.65)
 shader_parameter/distortion_intensity = 0.02
@@ -24,7 +24,7 @@ shader_parameter/time_scale = 0.09
 shader_parameter/water_transparency = 0.824
 shader_parameter/noise = SubResource("NoiseTexture2D_tlm87")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_evgw5"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h7nsl"]
 size = Vector2(2, 1000)
 
 [node name="Water" type="Node2D"]
@@ -47,7 +47,7 @@ collision_mask = 66
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WaterBody/Area2D"]
 position = Vector2(1, 501)
-shape = SubResource("RectangleShape2D_evgw5")
+shape = SubResource("RectangleShape2D_h7nsl")
 debug_color = Color(0.627451, 0.568627, 1, 0.419608)
 
 [connection signal="item_rect_changed" from="WaterBody" to="WaterBody" method="_on_item_rect_changed"]

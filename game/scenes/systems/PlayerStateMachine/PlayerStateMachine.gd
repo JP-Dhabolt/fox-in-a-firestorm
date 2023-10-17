@@ -29,10 +29,10 @@ func _ready():
 
 func _process(delta):
 	_elapsed_time += delta
-	_handle_basic_movement()
 	current_state.update(delta)
 
 func _physics_process(delta):
+	_handle_basic_movement()
 	current_state.update_physics(delta)
 
 func transition_to(state: PlayerState):
@@ -55,12 +55,12 @@ func change_player_speed(multiplier: float, duration: float):
 	_player_speed_changes.append(PlayerSpeedChange.new(multiplier, duration + _elapsed_time))
 
 func _handle_basic_movement():
-	_handle_speed_updates()
 	player.velocity.y += gravity + current_state.gravity_modifier
 	if current_state.movement_allowed():
 		var movement = Input.get_axis("move_left", "move_right")
 		player.velocity.x = movement * movement_speed
 	player.move_and_slide()
+	_handle_speed_updates()
 
 func _handle_speed_updates():
 	var items_to_remove: Array[PlayerSpeedChange] = []

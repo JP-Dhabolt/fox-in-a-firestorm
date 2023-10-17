@@ -3,6 +3,11 @@ class_name Player
 
 @export var food: int = 75
 @export var food_tick_rate: int = 2
+@export var heat: float = 50:
+	get:
+		return heat
+	set(p_heat):
+		heat = max(0, p_heat)
 
 @onready var sprite := $AnimatedSprite2D as AnimatedSprite2D
 @onready var state_machine := $PlayerStateMachine as PlayerStateMachine

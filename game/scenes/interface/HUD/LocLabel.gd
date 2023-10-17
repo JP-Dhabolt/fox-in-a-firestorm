@@ -1,5 +1,4 @@
 extends Label
-class_name LocLabel
 
 var tilemap: TileMap
 var player: Player
