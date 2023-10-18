@@ -11,8 +11,11 @@ class_name PlayerStateMachine
 @export var hurt_timer: Timer
 
 @export_group("Physics")
-@export var impact_slowdown_amount: float = 0.9
-@export var impact_slowdown_time: float = 6.0
+@export var gravity: float = 15.0
+@export var movement_speed: float = 150.0
+@export var jump_force: int = 300
+@export var underwater_jump_force: int = 100
+@export var pounce_force: int = 50
 
 var current_state: PlayerState
 var previous_state: PlayerState
@@ -26,10 +29,10 @@ func _ready():
 
 func _process(delta):
 	_elapsed_time += delta
-	_handle_basic_movement()
 	current_state.update(delta)
 
 func _physics_process(delta):
+	_handle_basic_movement()
 	current_state.update_physics(delta)
 
 func transition_to(state: PlayerState):
@@ -48,18 +51,16 @@ func start_eat_timer():
 	eat_timer.start()
 
 func change_player_speed(multiplier: float, duration: float):
-	player.movement_speed = player.movement_speed * multiplier
+	movement_speed = movement_speed * multiplier
 	_player_speed_changes.append(PlayerSpeedChange.new(multiplier, duration + _elapsed_time))
 
-func register_impact():
-	change_player_speed(impact_slowdown_amount, impact_slowdown_time)
-
 func _handle_basic_movement():
-	_handle_speed_updates()
-	var player_state := current_state as PlayerState
-	if player_state == null or player_state.movement_allowed():
+	player.velocity.y += gravity + current_state.gravity_modifier
+	if current_state.movement_allowed():
 		var movement = Input.get_axis("move_left", "move_right")
-		player.velocity.x = movement * player.movement_speed
+		player.velocity.x = movement * movement_speed
+	player.move_and_slide()
+	_handle_speed_updates()
 
 func _handle_speed_updates():
 	var items_to_remove: Array[PlayerSpeedChange] = []
@@ -68,20 +69,14 @@ func _handle_speed_updates():
 			items_to_remove.append(speed_change)
 
 	for item in items_to_remove:
-		player.movement_speed = player.movement_speed / item.speed_multiplier
+		movement_speed = movement_speed / item.speed_multiplier
 		_player_speed_changes.erase(item)
 
-func _on_player_collided_with(node: Node2D):
-	var player_state := current_state as PlayerState
-	if player_state != null:
-		player_state.on_collision(node)
-
 func _on_hurt_timer_timeout():
-	var player_state := current_state as PlayerState
-	if player_state != null:
-		player_state.on_timeout(hurt_timer)
+	current_state.on_timeout(hurt_timer)
 
 func _on_eat_timer_timeout():
-	var player_state := current_state as PlayerState
-	if player_state != null:
-		player_state.on_timeout(eat_timer)
+	current_state.on_timeout(eat_timer)
+
+func _on_collider_entered(body: Node2D):
+	current_state.on_collision(body)

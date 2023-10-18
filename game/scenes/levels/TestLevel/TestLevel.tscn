@@ -11,13 +11,13 @@
 position = Vector2(128, 128)
 
 [node name="Player" parent="." instance=ExtResource("2")]
-position = Vector2(-75, -75)
-jump_force = 300
+position = Vector2(-80, -80)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 
-[node name="HUD" parent="Player/Camera2D" node_paths=PackedStringArray("player") instance=ExtResource("2_j5s88")]
+[node name="HUD" parent="Player/Camera2D" node_paths=PackedStringArray("player", "terrain_generator") instance=ExtResource("2_j5s88")]
 player = NodePath("../..")
+terrain_generator = NodePath("../../../TerrainGenerator")
 
 [node name="TerrainGenerator" parent="." node_paths=PackedStringArray("player_node") instance=ExtResource("5_p6tqq")]
 position = Vector2(-128, -128)
@@ -30,3 +30,6 @@ offset_left = 158.0
 offset_top = 95.0
 offset_right = -162.0
 offset_bottom = -85.0
+
+[connection signal="entered_water" from="TerrainGenerator" to="Player" method="_on_terrain_generator_entered_water"]
+[connection signal="exited_water" from="TerrainGenerator" to="Player" method="_on_terrain_generator_exited_water"]

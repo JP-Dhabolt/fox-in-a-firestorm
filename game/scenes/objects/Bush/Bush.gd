@@ -1,7 +1,11 @@
 extends Area2D
 class_name Bush
 
-func _on_body_entered(body:Node2D):
-	var player := body as Player
-	if player != null:
-		player.on_collision(self)
+@export var slowdown_multiplier: float = 0.9
+@export var slowdown_time: float = 6.0
+
+func determine_slowdown():
+	return {
+		"multiplier": slowdown_multiplier,
+		"time": slowdown_time,
+	}
