@@ -9,6 +9,7 @@ data_*/
 # IDEs
 .vscode
 .idea
+game/Fox_in_a_Firestorm.sln.DotSettings.user
 
 # Outputs
 builds

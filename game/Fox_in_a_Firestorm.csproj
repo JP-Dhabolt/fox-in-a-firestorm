@@ -6,4 +6,7 @@
   <PropertyGroup>
     <DefaultItemExcludes>$(DefaultItemExcludes);projects/**/*</DefaultItemExcludes>
   </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="projects\FoxInAFirestorm.Game\FoxInAFirestorm.Game.csproj" />
+  </ItemGroup>
 </Project>
