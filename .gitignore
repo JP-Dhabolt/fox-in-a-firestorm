@@ -1,12 +1,17 @@
 # Godot-specific ignores
 export.cfg
+game/.godot/*
 
 # Mono-specific ignores
 .mono/
 data_*/
 
-# VS Code
+# IDEs
 .vscode
+.idea
 
 # Outputs
 builds
+game/projects/*/obj/*
+game/projects/*/bin/*
+
