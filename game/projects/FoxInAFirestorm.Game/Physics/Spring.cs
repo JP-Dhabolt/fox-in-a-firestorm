@@ -3,8 +3,7 @@
 public class Spring
 {
     public double Height { get; set; }
-    
-    private double _velocity;
+    public double Velocity;
     private double _springConstant;
     private double _dampingConstant;
 
@@ -12,15 +11,15 @@ public class Spring
     {
         _springConstant = springConstant;
         _dampingConstant = dampingConstant;
-        _velocity = velocity;
+        Velocity = velocity;
     }
 
     public double DetermineNewY(double targetHeight)
     {
         double displacement = Height - targetHeight;
-        double loss = -_dampingConstant * _velocity;
+        double loss = -_dampingConstant * Velocity;
         double force = -_springConstant * displacement + loss;
-        _velocity += force;
-        return Height + _velocity;
+        Velocity += force;
+        return Height + Velocity;
     }
 }
