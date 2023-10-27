@@ -13,28 +13,30 @@ public class SpringTest
         double dampingConstant = 0.01;
         var uut = new Spring(constant, dampingConstant)
         {
-            Height = height,
+            YPos = height,
         };
         double targetHeight = 50;
-        var newY = uut.DetermineNewY(targetHeight);
+        uut.DetermineNewY(targetHeight);
         double expectedNewY = (height - targetHeight) * -constant + height;
-        Assert.Equal(expectedNewY, newY, 0.00001);
+        Assert.Equal(expectedNewY, uut.YPos, 0.00001);
+        Assert.Equal(0, uut.XPos, 0.00001);
     }
 
     [Fact]
-    public void DetermineNewY_Returns_As_Expected_With_Velocity()
+    public void DetermineNewY_Sets_Y_As_Expected()
     {
         double height = 100;
         double constant = 0.015;
         double dampingConstant = 0.01;
         double startingVelocity = 10;
-        var uut = new Spring(constant, dampingConstant, velocity: startingVelocity)
+        var uut = new Spring(constant, dampingConstant)
         {
-            Height = height,
+            YPos = height,
+            Velocity = startingVelocity
         };
         double targetHeight = 50;
         double expectedNewY = (height - targetHeight) * -constant + height - dampingConstant * startingVelocity + startingVelocity;
-        double newY = uut.DetermineNewY(targetHeight);
-        Assert.Equal(expectedNewY, newY, 0.00001);
+        uut.DetermineNewY(targetHeight);
+        Assert.Equal(expectedNewY, uut.YPos, 0.00001);
     }
 }

@@ -8,9 +8,7 @@ public class WaterSpringsTest
     [Fact]
     public void WaterSprings_Constructor_Inits_As_Expected()
     {
-        double startX = 0, endX = 100, surfaceHeight = 50, distanceBetweenPoints = 5;
-        double springConstant = 0.01, dampeningConstant = 0.01;
-        var uut = new WaterSprings(startX, endX, surfaceHeight, distanceBetweenPoints, springConstant, dampeningConstant);
+        var uut = GenerateUUT();
         Assert.Equal(20, uut.Points.Count);
     }
 
@@ -21,7 +19,7 @@ public class WaterSpringsTest
     public void WaterSprings_GetClosestSpring_Returns_As_Expected(double xLocation, int expectedIndex)
     {
         var uut = GenerateUUT();
-        var expectedSpring = uut.Points[expectedIndex].Spring;
+        var expectedSpring = uut.Points[expectedIndex];
         var closestSpring = uut.GetClosestSpring(xLocation);
         Assert.Equal(expectedSpring, closestSpring);
     }
@@ -32,17 +30,39 @@ public class WaterSpringsTest
     [InlineData(98, 19)]
     public void WaterSprings_TriggerWaves_Adds_Velocity_To_Spring_As_Expected(double xLocation, int expectedIndex)
     {
-        double impactForce = 23.4;
         var uut = GenerateUUT();
-        uut.TriggerWaves(xLocation, impactForce);
-        var spring = uut.Points[expectedIndex].Spring;
-        Assert.Equal(impactForce, spring.Velocity, 0.000001);
+        uut.TriggerWaves(xLocation, ConstValues.ImpactForce);
+        var spring = uut.Points[expectedIndex];
+        Assert.Equal(ConstValues.ImpactForce, spring.Velocity, ConstValues.EqualityTolerance);
+    }
+
+    [Fact]
+    public void WaterSprings_ProcessWaves_Updates_Springs_As_Expected()
+    {
+        // Arrange
+        var uut = GenerateUUT();
+        uut.TriggerWaves(30, ConstValues.ImpactForce);
+        var spring6 = uut.Points[6];
+        var spring5 = uut.Points[5];
+        var spring7 = uut.Points[7];
+        double expected6Velocity = ConstValues.ImpactForce - ConstValues.DampeningConstant * ConstValues.ImpactForce;
+        double expectedNewY = ConstValues.SurfaceHeight + expected6Velocity;
+        double yDiff = expectedNewY - ConstValues.SurfaceHeight;
+        double expected5And7Velocity =  yDiff * ConstValues.VelocitySpread;
+
+        // Act
+        uut.ProcessWaves();
+
+        // Assert
+        Assert.Equal(expectedNewY, spring6.YPos, ConstValues.EqualityTolerance);
+        Assert.Equal(expected5And7Velocity, spring5.Velocity, ConstValues.EqualityTolerance);
+        Assert.Equal(expected5And7Velocity, spring7.Velocity, ConstValues.EqualityTolerance);
     }
 
     private WaterSprings GenerateUUT()
     {
-        double startX = 0, endX = 100, surfaceHeight = 50, distanceBetweenPoints = 5;
-        double springConstant = 0.01, dampeningConstant = 0.01;
-        return new WaterSprings(startX, endX, surfaceHeight, distanceBetweenPoints, springConstant, dampeningConstant);
+        return new WaterSprings(ConstValues.StartX, ConstValues.EndX, ConstValues.SurfaceHeight,
+            ConstValues.DistanceBetweenPoints, ConstValues.SpringConstant, ConstValues.DampeningConstant,
+            ConstValues.VelocitySpread);
     }
 }
