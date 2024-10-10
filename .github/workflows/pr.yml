@@ -9,19 +9,14 @@ jobs:
     name: Build and Test Game
     steps:
     - name: checkout
-      uses: actions/checkout@v3
-
-    - name: Run Tests
-      uses: JP-Dhabolt/godot-gut-ci@v4
-      with:
-        godot_version: '4.1.1'
-        working_dir: game/
+      uses: actions/checkout@v4
 
     - name: Build Game
-      uses: firebelley/godot-export@v4.7.0
+      uses: firebelley/godot-export@v5
       with:
-        godot_executable_download_url: https://github.com/godotengine/godot/releases/download/4.1.1-stable/Godot_v4.1.1-stable_linux.x86_64.zip
-        godot_export_templates_download_url: https://github.com/godotengine/godot/releases/download/4.1.1-stable/Godot_v4.1.1-stable_export_templates.tpz
+        godot_executable_download_url: https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_linux.x86_64.zip
+        godot_export_templates_download_url: https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_export_templates.tpz
         relative_project_path: ./game/
+        cache: true
         archive_output: false
-        use_godot_4: true
+        relative_export_path: ./game/export
