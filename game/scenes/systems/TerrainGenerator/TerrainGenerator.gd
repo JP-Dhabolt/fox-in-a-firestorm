@@ -164,7 +164,7 @@ func randomize_terrain():
 
 
 func _on_water_entered_water(body: Node2D):
-	emit_signal("entered_water", body)
+	entered_water.emit(body)
 
 func _on_water_exited_water(body: Node2D):
-	emit_signal("exited_water", body)
+	exited_water.emit(body)

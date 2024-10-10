@@ -46,9 +46,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			pause()
 
 func _reload_scene():
-	get_tree().reload_current_scene()
 	unpause()
+	get_tree().reload_current_scene()
 
 func _load_menu():
-	get_tree().change_scene_to_file("res://scenes/levels/Main.tscn")
 	unpause()
+	get_tree().change_scene_to_file("res://scenes/levels/Main.tscn")
