@@ -15,3 +15,6 @@ export_presets.cfg
 data_*/
 mono_crash.*.json
 
+# Outputs
+builds/*/*
+!builds/web/enable-threads.js
