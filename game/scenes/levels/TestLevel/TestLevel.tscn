@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dsyeewn78c28r"]
+[gd_scene load_steps=8 format=3 uid="uid://dsyeewn78c28r"]
 
 [ext_resource type="PackedScene" uid="uid://cqnuwdbv7t1jm" path="res://scenes/characters/Player/Player.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://ub25a470q2tw" path="res://scenes/interface/HUD/HUD.tscn" id="2_j5s88"]
 [ext_resource type="Resource" uid="uid://bxrhlvm471kb3" path="res://scenes/levels/TestLevel/SpawnableLeaf.tres" id="4_dxeso"]
+[ext_resource type="Script" path="res://custom_resources/SpawnableItem.gd" id="4_o5si1"]
 [ext_resource type="Resource" uid="uid://ciylhfor8pce6" path="res://scenes/levels/TestLevel/SpawnableBush.tres" id="5_c7lt4"]
 [ext_resource type="PackedScene" uid="uid://g5xdeqs6ky7f" path="res://scenes/interface/MenuModal/MenuModal.tscn" id="5_hsehm"]
 [ext_resource type="PackedScene" uid="uid://ceqcxqo62twgj" path="res://scenes/systems/TerrainGenerator/TerrainGenerator.tscn" id="5_p6tqq"]
@@ -22,7 +23,7 @@ terrain_generator = NodePath("../../../TerrainGenerator")
 [node name="TerrainGenerator" parent="." node_paths=PackedStringArray("player_node") instance=ExtResource("5_p6tqq")]
 position = Vector2(-128, -128)
 player_node = NodePath("../Player")
-spawnable_items = Array[Resource("res://custom_resources/SpawnableItem.gd")]([ExtResource("4_dxeso"), ExtResource("5_c7lt4")])
+spawnable_items = Array[ExtResource("4_o5si1")]([ExtResource("4_dxeso"), ExtResource("5_c7lt4")])
 
 [node name="MenuModal" parent="." instance=ExtResource("5_hsehm")]
 top_level = true
@@ -33,3 +34,10 @@ offset_bottom = -85.0
 
 [connection signal="entered_water" from="TerrainGenerator" to="Player" method="_on_terrain_generator_entered_water"]
 [connection signal="exited_water" from="TerrainGenerator" to="Player" method="_on_terrain_generator_exited_water"]
+[connection signal="body_entered" from="TerrainGenerator/Leaves" to="TerrainGenerator/Leaves" method="_on_Leaves_body_entered"]
+[connection signal="body_entered" from="TerrainGenerator/@Area2D@27653" to="TerrainGenerator/@Area2D@27653" method="_on_Leaves_body_entered"]
+[connection signal="body_entered" from="TerrainGenerator/@Area2D@27656" to="TerrainGenerator/@Area2D@27656" method="_on_Leaves_body_entered"]
+[connection signal="body_entered" from="TerrainGenerator/@Area2D@27661" to="TerrainGenerator/@Area2D@27661" method="_on_Leaves_body_entered"]
+[connection signal="body_entered" from="TerrainGenerator/@Area2D@27669" to="TerrainGenerator/@Area2D@27669" method="_on_Leaves_body_entered"]
+[connection signal="body_entered" from="TerrainGenerator/@Area2D@27670" to="TerrainGenerator/@Area2D@27670" method="_on_Leaves_body_entered"]
+[connection signal="body_entered" from="TerrainGenerator/@Area2D@27673" to="TerrainGenerator/@Area2D@27673" method="_on_Leaves_body_entered"]
