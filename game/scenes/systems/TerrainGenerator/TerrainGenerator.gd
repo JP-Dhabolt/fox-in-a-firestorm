@@ -5,7 +5,7 @@ class_name TerrainGenerator
 @export var player_node: Node2D
 @export var spawnable_items: Array[SpawnableItem] = []
 
-@onready var tilemap := $TileMap as TileMap
+@onready var ground_layer := $GroundLayer as TileMapLayer
 @onready var water := $Water as Water
 
 signal entered_water(body: Node2D)
@@ -28,9 +28,6 @@ var min_y: int
 var water_height_in_tiles: int
 var water_needs_redrawn: bool = true
 
-const LAYERS = {
-	"GROUND": 0,
-}
 const TERRAIN_SETS = {
 	"GROUND": 0,
 }
@@ -40,7 +37,8 @@ const TERRAINS = {
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	tilemap.clear()
+	ground_layer.clear()
+	# water_layer.clear()
 	fast_noise = NoiseForTerrain.get_noise_by_type(NoiseForTerrain.NoiseForTerrainType.INITIAL)
 	var viewport_rect = get_viewport_rect()
 	max_x = ceil(viewport_rect.size.x / TILE_HEIGHT_IN_PIXELS)
@@ -64,7 +62,7 @@ func _verify_spawnable_items():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if not Engine.is_editor_hint():
-		var player_node_x = tilemap.local_to_map(player_node.global_position).x
+		var player_node_x = ground_layer.local_to_map(player_node.global_position).x
 		_draw_and_clear_map(player_node_x)
 
 func _draw_and_clear_map(player_x: int):
@@ -113,13 +111,13 @@ func _redraw_water_if_needed():
 func _place_tile(x: int):
 	var y_val = _determine_y_value(x)
 	var vectors = range(y_val, depth).map(func(y): return Vector2i(x, y))
-	tilemap.set_cells_terrain_connect(LAYERS.GROUND, vectors, TERRAIN_SETS.GROUND, TERRAINS.GROUND)
+	ground_layer.set_cells_terrain_connect(vectors, TERRAIN_SETS.GROUND, TERRAINS.GROUND)
 	if y_val <= water_height_in_tiles:
 		_place_objects(x, y_val)
 
 func _draw_left_boundary():
 	var vectors = range(0, max_y).map(func(y): return Vector2i(-1, y))
-	tilemap.set_cells_terrain_connect(LAYERS.GROUND, vectors, TERRAIN_SETS.GROUND, TERRAINS.GROUND)
+	ground_layer.set_cells_terrain_connect(vectors, TERRAIN_SETS.GROUND, TERRAINS.GROUND)
 
 func _place_objects(x: int, y: int):
 	rng.seed = x
@@ -129,14 +127,14 @@ func _place_objects(x: int, y: int):
 		spawn_threshold += item.spawn_possibility
 		if spawn_chance < spawn_threshold:
 			var item_instance = item.spawn_item.instantiate()
-			item_instance.position = tilemap.map_to_local(Vector2i(x, y - 1))
+			item_instance.position = ground_layer.map_to_local(Vector2i(x, y - 1))
 			add_child(item_instance)
 			instance_dict[x] = item_instance
 			break
 
 func _erase_tile(x: int):
 	for y in range(min_y, max_y):
-		tilemap.erase_cell(LAYERS.GROUND, Vector2i(x, y))
+		ground_layer.erase_cell(Vector2i(x, y))
 	_erase_object(x)
 
 func _erase_object(x: int):
@@ -152,7 +150,7 @@ func _determine_y_value(x: int):
 	return min_y + int(normalized_noise * y_range)
 
 func redraw_terrain():
-	tilemap.clear()
+	ground_layer.clear()
 	fast_noise.seed = randi()
 	for x in range(earliest_x_drawn, latest_x_drawn):
 		_place_tile(x)
@@ -164,7 +162,7 @@ func randomize_terrain():
 
 
 func _on_water_entered_water(body: Node2D):
-	emit_signal("entered_water", body)
+	entered_water.emit(body)
 
 func _on_water_exited_water(body: Node2D):
-	emit_signal("exited_water", body)
+	exited_water.emit(body)

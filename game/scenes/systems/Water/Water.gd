@@ -35,13 +35,13 @@ func _physics_process(_delta):
 			water_body.draw_water(water_line.points, depth)
 
 func _on_area_2d_body_entered(body: Node2D):
-	emit_signal("entered_water", body)
+	entered_water.emit(body)
 	var local_pos := to_local(body.global_position)
 	var impact_force: float = body.get_meta("impact_force", default_impact_force)
 	water_line.trigger_waves(local_pos, impact_force)
 
 func _on_area_2d_body_exited(body: Node2D):
-	emit_signal("exited_water", body)
+	exited_water.emit(body)
 	var local_pos := to_local(body.global_position)
 	var impact_force: float = body.get_meta("impact_force", default_impact_force)
 	water_line.trigger_waves(local_pos, impact_force)
