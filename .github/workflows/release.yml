@@ -6,9 +6,12 @@ permissions:
   packages: write
 
 jobs:
-  export_game:
+  build:
     runs-on: ubuntu-latest
     name: Export Game
+    outputs:
+      tag: ${{ steps.tag.outputs.new_tag }}
+      archive_directory: ${{ steps.export.outputs.archive_directory }}
     steps:
     - name: checkout
       uses: actions/checkout@v4
@@ -21,7 +24,7 @@ jobs:
         WITH_V: true
         DEFAULT_BUMP: patch
 
-    - name: Export Game
+    - name: Build
       id: export
       uses: firebelley/godot-export@v5.2.1
       with:
@@ -32,10 +35,47 @@ jobs:
         archive_output: true
         relative_export_path: ./game/export
 
-    - name: create release
-      uses: ncipollo/release-action@v1.14.0
+    - name: Setup Pages
+      uses: actions/configure-pages@v5
+
+    - name: Upload pages artifact
+      uses: actions/upload-pages-artifact@v3
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        generateReleaseNotes: true
-        tag: ${{ steps.tag.outputs.new_tag }}
-        artifacts: ${{ steps.export.outputs.archive_directory }}/*
+        path: ./game/builds/web
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: game
+        path: ${{ steps.export.outputs.archive_directory }}
+
+  deploy:
+    needs: build
+    permissions:
+      contents: write
+      packages: write
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Github Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Download Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: game
+
+      - name: create release
+        uses: ncipollo/release-action@v1.14.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          generateReleaseNotes: true
+          tag: ${{ needs.build.outputs.tag }}
+          artifacts: ${{ needs.build.outputs.archive_directory }}/*
