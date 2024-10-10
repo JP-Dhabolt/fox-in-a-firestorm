@@ -11,7 +11,6 @@ jobs:
     name: Export Game
     outputs:
       tag: ${{ steps.tag.outputs.new_tag }}
-      archive_directory: ${{ steps.export.outputs.archive_directory }}
     steps:
     - name: checkout
       uses: actions/checkout@v4
@@ -33,7 +32,7 @@ jobs:
         relative_project_path: ./game/
         cache: true
         archive_output: true
-        relative_export_path: ./game/export
+        use_preset_export_path: true
 
     - name: Setup Pages
       uses: actions/configure-pages@v5
@@ -78,4 +77,4 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           generateReleaseNotes: true
           tag: ${{ needs.build.outputs.tag }}
-          artifacts: ${{ needs.build.outputs.archive_directory }}/*
+          artifacts: linux.zip,win.zip
