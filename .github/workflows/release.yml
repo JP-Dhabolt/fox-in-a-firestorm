@@ -40,7 +40,7 @@ jobs:
     - name: Upload pages artifact
       uses: actions/upload-pages-artifact@v3
       with:
-        path: ./game/builds/web
+        path: ${{ steps.export.outputs.build_directory }}/web
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
