@@ -32,5 +32,5 @@ jobs:
       with:
         name: game
         path: |
-          ${{ steps.export.outputs.archive_directory }}/linux/
-          ${{ steps.export.outputs.archive_directory }}/win/
+          ${{ steps.export.outputs.build_directory }}/linux/
+          ${{ steps.export.outputs.build_directory }}/win/
