@@ -34,6 +34,12 @@ jobs:
         archive_output: false
         use_preset_export_path: true
 
+    - name: Bundle Head Script
+      run: |
+        cp ./game/builds/web/enable-threads.js ${BUILD_DIR}/web/
+      env:
+        BUILD_DIR: ${{ steps.export.outputs.build_directory }}
+
     - name: Setup Pages
       uses: actions/configure-pages@v5
 
