@@ -31,7 +31,7 @@ jobs:
         godot_export_templates_download_url: https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_export_templates.tpz
         relative_project_path: ./game/
         cache: true
-        archive_output: true
+        archive_output: false
         use_preset_export_path: true
 
     - name: Setup Pages
@@ -46,7 +46,9 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: game
-        path: ${{ steps.export.outputs.archive_directory }}
+        path: |
+          ${{ steps.export.outputs.build_directory }}/linux/
+          ${{ steps.export.outputs.build_directory }}/win/
 
   deploy:
     needs: build
@@ -70,6 +72,11 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: game
+
+      - name: Create Zips
+        run: |
+          zip -r linux.zip linux
+          zip -r win.zip win
 
       - name: create release
         uses: ncipollo/release-action@v1.14.0
