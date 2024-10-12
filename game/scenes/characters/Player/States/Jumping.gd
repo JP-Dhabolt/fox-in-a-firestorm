@@ -13,5 +13,5 @@ func update_physics(_delta):
 	var player = state_machine.player
 	if player.velocity.y >= 0 and player.is_on_floor():
 		state_machine.transition_to(state_machine.states.normal)
-	if Input.is_action_just_pressed("jump"):
+	if Input.is_action_just_pressed("pounce"):
 		state_machine.transition_to(state_machine.states.pouncing)
