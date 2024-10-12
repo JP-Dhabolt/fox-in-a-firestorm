@@ -6,7 +6,9 @@
 [ext_resource type="Script" path="res://scenes/interface/HUD/LocLabel.gd" id="4_80ii1"]
 [ext_resource type="Script" path="res://scenes/interface/HUD/HeatLabel.gd" id="5_tbadt"]
 
-[node name="HUD" type="Node2D"]
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_pdqff")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
