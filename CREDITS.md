@@ -13,6 +13,3 @@
 * "Mountain at Dusk Background" by ansimuz licensed CC0: https://opengameart.org/content/mountain-at-dusk-background
 
 ## Code Assets
-
-* "Gut" licensed MIT: https://github.com/bitwes/Gut
-

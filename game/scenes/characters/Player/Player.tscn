@@ -8,13 +8,13 @@
 [ext_resource type="Texture2D" uid="uid://bsnk3mgsa6nwk" path="res://sprites/sunnyland_2d_pixel_art_pack/player_pounce.png" id="6_x3iql"]
 [ext_resource type="Texture2D" uid="uid://djxtqoq5emvb7" path="res://sprites/sunnyland_2d_pixel_art_pack/player_run.png" id="7_0dvi7"]
 [ext_resource type="PackedScene" uid="uid://bjr754j6go216" path="res://scenes/systems/PlayerStateMachine/PlayerStateMachine.tscn" id="8_oc1yq"]
-[ext_resource type="Resource" uid="uid://50usuifygg3t" path="res://scenes/characters/Player/States/StandardPlayerStates.tres" id="9_y2ejv"]
 [ext_resource type="Script" path="res://scenes/characters/Player/StateLabel.gd" id="10_81ayk"]
 [ext_resource type="Script" path="res://scenes/characters/Player/States/Normal.gd" id="10_l750q"]
 [ext_resource type="Script" path="res://scenes/characters/Player/States/Eating.gd" id="11_y6usl"]
 [ext_resource type="Script" path="res://scenes/characters/Player/States/Hurting.gd" id="12_6wgko"]
 [ext_resource type="Script" path="res://scenes/characters/Player/States/Pouncing.gd" id="13_nceum"]
 [ext_resource type="Script" path="res://scenes/characters/Player/States/Jumping.gd" id="14_7d13h"]
+[ext_resource type="Script" path="res://custom_resources/PlayerStates.gd" id="15_4u5fm"]
 [ext_resource type="Script" path="res://scenes/characters/Player/States/Swimming.gd" id="15_x1g4m"]
 
 [sub_resource type="AtlasTexture" id="19"]
@@ -195,9 +195,9 @@ one_shot = true
 [node name="EatTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="PlayerStateMachine" parent="." node_paths=PackedStringArray("player", "eat_timer", "hurt_timer") instance=ExtResource("8_oc1yq")]
+[node name="PlayerStateMachine" parent="." node_paths=PackedStringArray("player", "states", "eat_timer", "hurt_timer") instance=ExtResource("8_oc1yq")]
 player = NodePath("..")
-states = ExtResource("9_y2ejv")
+states = NodePath("StandardPlayerStates")
 eat_timer = NodePath("../EatTimer")
 hurt_timer = NodePath("../HurtTimer")
 
@@ -218,6 +218,15 @@ script = ExtResource("14_7d13h")
 
 [node name="Swimming" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("15_x1g4m")
+
+[node name="StandardPlayerStates" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("normal", "jumping", "pouncing", "eating", "hurting", "swimming")]
+script = ExtResource("15_4u5fm")
+normal = NodePath("../Normal")
+jumping = NodePath("../Jumping")
+pouncing = NodePath("../Pouncing")
+eating = NodePath("../Eating")
+hurting = NodePath("../Hurting")
+swimming = NodePath("../Swimming")
 
 [node name="StateLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
 offset_left = -1.0

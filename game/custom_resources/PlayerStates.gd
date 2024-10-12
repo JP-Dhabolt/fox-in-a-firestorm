@@ -1,29 +1,12 @@
-extends Resource
+extends Node
 class_name PlayerStates
 
-var normal: PlayerState:
-	set(p_normal):
-		normal = p_normal
-
-var jumping: PlayerState:
-	set(p_jumping):
-		jumping = p_jumping
-
-var pouncing: PlayerState:
-	set(p_pouncing):
-		pouncing = p_pouncing
-
-var eating: PlayerState:
-	set(p_eating):
-		eating = p_eating
-
-var hurting: PlayerState:
-	set(p_hurting):
-		hurting = p_hurting
-
-var swimming: PlayerState:
-	set(p_swimming):
-		swimming = p_swimming
+@export var normal: PlayerState
+@export var jumping: PlayerState
+@export var pouncing: PlayerState
+@export var eating: PlayerState
+@export var hurting: PlayerState
+@export var swimming: PlayerState
 
 func register_all(state_machine: PlayerStateMachine):
 	var _states: Array[PlayerState] = [
