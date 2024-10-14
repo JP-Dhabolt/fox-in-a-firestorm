@@ -4,6 +4,8 @@ class_name TerrainGenerator
 
 @export var player_node: Node2D
 @export var spawnable_items: Array[SpawnableItem] = []
+@export var noise: FastNoiseLite
+@export var editor_refresh_rate: float = 0.0
 
 @onready var ground_layer := $GroundLayer as TileMapLayer
 @onready var water := $Water as Water
@@ -42,8 +44,11 @@ func _ready():
 	fast_noise = NoiseForTerrain.get_noise_by_type(NoiseForTerrain.NoiseForTerrainType.INITIAL)
 	var viewport_rect = get_viewport_rect()
 	max_x = ceil(viewport_rect.size.x / TILE_HEIGHT_IN_PIXELS)
+
 	if not Engine.is_editor_hint():
 		max_y = ceil(viewport_rect.size.y / TILE_HEIGHT_IN_PIXELS)
+		noise.seed = randi()
+
 	min_y = ceil(max_y / 3.0)
 	water_height_in_tiles = min_y * 2
 	for x in range(min_x, max_x + 5):
@@ -51,6 +56,9 @@ func _ready():
 	_draw_left_boundary()
 	latest_x_drawn = max_x + 5
 	_redraw_water_if_needed()
+
+	if Engine.is_editor_hint() and editor_refresh_rate > 0.0:
+		_editor_force_redraw()
 
 func _verify_spawnable_items():
 	var total_spawn_chance = 0.0
@@ -144,14 +152,17 @@ func _erase_object(x: int):
 		instance_dict.erase(x)
 
 func _determine_y_value(x: int):
-	var noise_value = fast_noise.get_noise_1d(x)
+	# var noise_value = fast_noise.get_noise_1d(x)
+	var noise_value = noise.get_noise_1d(x)
 	var normalized_noise = (noise_value + 1) / 2
 	var y_range = max_y - min_y
 	return min_y + int(normalized_noise * y_range)
 
 func redraw_terrain():
 	ground_layer.clear()
-	fast_noise.seed = randi()
+	# fast_noise.seed = randi()
+	if not Engine.is_editor_hint():
+		noise.seed = randi()
 	for x in range(earliest_x_drawn, latest_x_drawn):
 		_place_tile(x)
 
@@ -166,3 +177,7 @@ func _on_water_entered_water(body: Node2D):
 
 func _on_water_exited_water(body: Node2D):
 	exited_water.emit(body)
+
+func _editor_force_redraw():
+	redraw_terrain()
+	get_tree().create_timer(editor_refresh_rate).timeout.connect(_editor_force_redraw)

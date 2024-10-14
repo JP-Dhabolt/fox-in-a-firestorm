@@ -1,10 +1,8 @@
 extends Label
 
-var player: Player
-func _ready():
-	await owner.ready
-	player = owner.player as Player
-	assert(player != null, "Player must be available to use this node")
-
 func _process(_delta):
-	text = "Food: " + str(player.food)
+	var food_amount: int = -99
+	if GameManager.current_player != null:
+		food_amount = GameManager.current_player.food
+
+	text = "Food: " + str(food_amount)
