@@ -6,12 +6,17 @@ extends ColorRect
 @onready var menu_exit_button: Button = find_child("MenuExitButton")
 @onready var desktop_exit_button: Button = find_child("DesktopExitButton")
 
+var hide_quit_on_plaform: bool = OS.get_name() == "Web"
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	continue_button.pressed.connect(unpause)
 	restart_button.pressed.connect(_reload_scene)
 	menu_exit_button.pressed.connect(_load_menu)
 	desktop_exit_button.pressed.connect(get_tree().quit)
+
+	if hide_quit_on_plaform:
+		desktop_exit_button.queue_free()
 
 func pause():
 	_center()
