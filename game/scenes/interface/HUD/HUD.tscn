@@ -6,14 +6,10 @@
 [ext_resource type="Script" path="res://scenes/interface/HUD/LocLabel.gd" id="4_80ii1"]
 [ext_resource type="Script" path="res://scenes/interface/HUD/HeatLabel.gd" id="5_tbadt"]
 
-[node name="HUD" type="Control"]
-layout_mode = 3
-anchors_preset = 0
+[node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_pdqff")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Food" type="Label" parent="CanvasLayer"]
+[node name="Food" type="Label" parent="."]
 offset_left = 279.0
 offset_right = 319.0
 offset_bottom = 23.0
@@ -22,14 +18,14 @@ text = "Food: 100"
 horizontal_alignment = 2
 script = ExtResource("2_o3t81")
 
-[node name="Speed" type="Label" parent="CanvasLayer"]
-offset_right = 40.0
+[node name="Speed" type="Label" parent="."]
+offset_right = 42.0
 offset_bottom = 23.0
 theme_override_font_sizes/font_size = 8
 text = "Speed: 150"
 script = ExtResource("3_780r7")
 
-[node name="LocLabel" type="Label" parent="CanvasLayer"]
+[node name="LocLabel" type="Label" parent="."]
 offset_top = 157.0
 offset_right = 40.0
 offset_bottom = 180.0
@@ -38,7 +34,7 @@ text = "Loc: 0, 0"
 vertical_alignment = 2
 script = ExtResource("4_80ii1")
 
-[node name="HeatLabel" type="Label" parent="CanvasLayer"]
+[node name="HeatLabel" type="Label" parent="."]
 offset_left = 279.0
 offset_top = 157.0
 offset_right = 319.0

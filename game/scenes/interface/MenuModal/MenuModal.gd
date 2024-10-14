@@ -6,6 +6,8 @@ extends ColorRect
 @onready var menu_exit_button: Button = find_child("MenuExitButton")
 @onready var desktop_exit_button: Button = find_child("DesktopExitButton")
 
+var hide_quit_on_plaform: bool = OS.get_name() == "Web"
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	continue_button.pressed.connect(unpause)
@@ -13,8 +15,10 @@ func _ready():
 	menu_exit_button.pressed.connect(_load_menu)
 	desktop_exit_button.pressed.connect(get_tree().quit)
 
+	if hide_quit_on_plaform:
+		desktop_exit_button.queue_free()
+
 func pause():
-	_center()
 	animation_player.play("Pause")
 	get_tree().paused = true
 	continue_button.grab_focus()
@@ -22,21 +26,6 @@ func pause():
 func unpause():
 	animation_player.play("Unpause")
 	get_tree().paused = false
-
-func _center():
-	var screen_origin = _get_screen_origin()
-	var screen_rect = get_viewport_rect()
-	var rect = get_rect()
-	var x_offset = (screen_rect.size.x - rect.size.x) / 2
-	var y_offset = (screen_rect.size.y - rect.size.y) / 2
-	screen_origin.x += x_offset
-	screen_origin.y += y_offset
-	set_position(screen_origin)
-
-func _get_screen_origin() -> Vector2:
-	var transform: Transform2D = get_viewport_transform()
-	var transform_scale: Vector2 = transform.get_scale()
-	return -transform.origin / transform_scale
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
