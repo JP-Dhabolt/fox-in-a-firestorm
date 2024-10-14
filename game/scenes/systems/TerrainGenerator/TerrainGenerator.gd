@@ -18,7 +18,6 @@ const TILE_HEIGHT_IN_PIXELS: int = 16
 var earliest_x_drawn: int = 0
 var latest_x_drawn: int = 0
 var elapsed_time = 0.0
-var fast_noise: FastNoiseLite
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var instance_dict: Dictionary = {}
 
@@ -40,8 +39,6 @@ const TERRAINS = {
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	ground_layer.clear()
-	# water_layer.clear()
-	fast_noise = NoiseForTerrain.get_noise_by_type(NoiseForTerrain.NoiseForTerrainType.INITIAL)
 	var viewport_rect = get_viewport_rect()
 	max_x = ceil(viewport_rect.size.x / TILE_HEIGHT_IN_PIXELS)
 
@@ -165,12 +162,6 @@ func redraw_terrain():
 		noise.seed = randi()
 	for x in range(earliest_x_drawn, latest_x_drawn):
 		_place_tile(x)
-
-func randomize_terrain():
-	fast_noise = NoiseForTerrain.get_noise_by_type(NoiseForTerrain.NoiseForTerrainType.RANDOM)
-	Utilities.print_object_properties(fast_noise)
-	redraw_terrain()
-
 
 func _on_water_entered_water(body: Node2D):
 	entered_water.emit(body)
