@@ -19,7 +19,6 @@ func _ready():
 		desktop_exit_button.queue_free()
 
 func pause():
-	_center()
 	animation_player.play("Pause")
 	get_tree().paused = true
 	continue_button.grab_focus()
@@ -27,21 +26,6 @@ func pause():
 func unpause():
 	animation_player.play("Unpause")
 	get_tree().paused = false
-
-func _center():
-	var screen_origin = _get_screen_origin()
-	var screen_rect = get_viewport_rect()
-	var rect = get_rect()
-	var x_offset = (screen_rect.size.x - rect.size.x) / 2
-	var y_offset = (screen_rect.size.y - rect.size.y) / 2
-	screen_origin.x += x_offset
-	screen_origin.y += y_offset
-	set_position(screen_origin)
-
-func _get_screen_origin() -> Vector2:
-	var transform: Transform2D = get_viewport_transform()
-	var transform_scale: Vector2 = transform.get_scale()
-	return -transform.origin / transform_scale
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):

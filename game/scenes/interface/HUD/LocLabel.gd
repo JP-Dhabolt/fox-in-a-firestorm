@@ -4,11 +4,9 @@ var ground_layer: TileMapLayer
 var player: Player
 
 func _ready():
-	await owner.ready
-	player = owner.player as Player
+	player = get_parent().player as Player
 	assert(player != null, "Player must be available to use this node")
-	await owner.terrain_generator.ready
-	ground_layer = owner.terrain_generator.ground_layer as TileMapLayer
+	ground_layer = get_parent().terrain_generator.ground_layer as TileMapLayer
 	assert(ground_layer != null, "TerrainGenerator TileMape must be available to use this node")
 
 func _process(_delta):
