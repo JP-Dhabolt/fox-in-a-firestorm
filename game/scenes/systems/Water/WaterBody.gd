@@ -12,6 +12,9 @@ func _ready():
 	_on_item_rect_changed()
 
 func draw_water(points: PackedVector2Array, depth: float):
+	if points.size() < 2:
+		print_debug("Not Renderable")
+
 	var water_body = _determine_curve(points, control_point_distance)
 	water_body.append(Vector2(points[-1].x, depth))
 	water_body.append(Vector2(points[0].x, depth))
