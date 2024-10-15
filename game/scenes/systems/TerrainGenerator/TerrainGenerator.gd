@@ -19,7 +19,7 @@ signal exited_water(body: Node2D)
 const TILE_HEIGHT_IN_PIXELS: int = 16
 
 var earliest_x_drawn: int = 0
-var latest_x_drawn: int = 0
+var latest_x_drawn: int = -1
 var elapsed_time = 0.0
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var instance_dict: Dictionary = {}
@@ -79,38 +79,38 @@ func _draw_and_clear_map(player_x: int):
 func _draw_right_if_needed(player_x: int):
 	is_processing_right = true
 	if player_x + max_x > latest_x_drawn:
-		for x in range(latest_x_drawn, player_x + max_x + 1):
+		for x in range(latest_x_drawn + 1, player_x + max_x + 1):
 			_place_tile(x)
 		latest_x_drawn = player_x + max_x
 
 		while is_in_body_of_water:
 			_place_tile(latest_x_drawn + 1)
-			latest_x_drawn = latest_x_drawn + 1
+			latest_x_drawn += 1
 
 func _draw_left_if_needed(player_x: int):
 	is_processing_right = false
-	if (player_x - max_x) < earliest_x_drawn:
-		for x in range(earliest_x_drawn, player_x - max_x - 1, -1):
+	if player_x - max_x < earliest_x_drawn:
+		for x in range(earliest_x_drawn - 1, player_x - max_x - 1, -1):
 			_place_tile(x)
 		earliest_x_drawn = player_x - max_x
 
 		while is_in_body_of_water:
 			_place_tile(earliest_x_drawn - 1)
-			earliest_x_drawn = earliest_x_drawn - 1
+			earliest_x_drawn -= 1
 
 func _clear_right_if_needed(player_x: int):
 	is_processing_right = true
 	if player_x + max_x * 2 < latest_x_drawn:
-		for x in range(player_x + max_x, latest_x_drawn):
+		for x in range(player_x + max_x, latest_x_drawn + 1):
 			_erase_tile(x)
-		latest_x_drawn = player_x + max_x
+		latest_x_drawn = player_x + max_x - 1
 
 func _clear_left_if_needed(player_x: int):
 	is_processing_right = false
 	if player_x - max_x * 2 > earliest_x_drawn:
-		for x in range(earliest_x_drawn, player_x - max_x):
+		for x in range(player_x - max_x, earliest_x_drawn - 1, -1):
 			_erase_tile(x)
-		earliest_x_drawn = player_x - max_x
+		earliest_x_drawn = player_x - max_x + 1
 
 func draw_water():
 	# Add a buffer to either end to prevent ensure enough waterline exists for rendering
@@ -197,7 +197,6 @@ func _erase_water(x: int):
 		water_start_dict.erase(water_start)
 
 func _determine_y_value(x: int):
-	# var noise_value = fast_noise.get_noise_1d(x)
 	var noise_value = noise.get_noise_1d(x)
 	var normalized_noise = (noise_value + 1) / 2
 	var y_range = max_y - min_y
@@ -217,7 +216,7 @@ func redraw_terrain():
 
 	noise.seed = randi()
 
-	for x in range(earliest_x_drawn, latest_x_drawn):
+	for x in range(earliest_x_drawn, latest_x_drawn + 1):
 		_place_tile(x)
 
 func _on_water_entered_water(body: Node2D):
@@ -227,7 +226,7 @@ func _on_water_exited_water(body: Node2D):
 	exited_water.emit(body)
 
 func _editor_force_redraw(_irrelevant: bool):
-	if not Engine.is_editor_hint():
+	if not Engine.is_editor_hint() or not is_node_ready():
 		return
 
 	redraw_terrain()
