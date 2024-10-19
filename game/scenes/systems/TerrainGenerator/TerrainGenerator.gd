@@ -25,6 +25,7 @@ var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var instance_dict: Dictionary = {}
 var water_start_dict: Dictionary = {}
 var water_end_dict: Dictionary = {}
+var height_dict: Dictionary = {}
 
 var max_x: int
 var min_x: int = 0
@@ -37,6 +38,8 @@ var is_processing_right: bool = true
 var is_in_body_of_water: bool = false
 var water_start_x: int
 var water_end_x: int
+
+var memory_leak_message: String = "Overwriting item at x: {0} in dict {1}. This is a memory leak."
 
 const TERRAIN_SETS = {
 	"GROUND": 0,
@@ -57,6 +60,7 @@ func _ready():
 	min_y = ceil(max_y / 3.0)
 	water_height_in_tiles = min_y * 2
 	_draw_and_clear_map(0)
+	print("Max x: {0}, water height: {1}".format([max_x, water_height_in_tiles]))
 
 func _verify_spawnable_items():
 	var total_spawn_chance = 0.0
@@ -100,22 +104,55 @@ func _draw_left_if_needed(player_x: int):
 
 func _clear_right_if_needed(player_x: int):
 	is_processing_right = true
+	var water_already_detected := false
+	var earliest_clear_x := player_x + max_x
 	if player_x + max_x * 2 < latest_x_drawn:
-		for x in range(player_x + max_x, latest_x_drawn + 1):
+		for x in range(latest_x_drawn, earliest_clear_x, -1):
+			# TODO: Continue troubleshooting why the dictionary entries are empty
+			var is_in_water := _is_in_water(height_dict[x])
+			if is_in_water and not water_already_detected:
+				var water_entry = get_close_water_entry(x, water_end_dict)
+				if water_entry != null:
+					var water_start_loc: int = water_entry["start"]
+					var is_safe_to_clear := water_start_loc > earliest_clear_x
+					if not is_safe_to_clear:
+						return
+				else:
+					is_in_water = false
+
+			water_already_detected = is_in_water
 			_erase_tile(x)
-		latest_x_drawn = player_x + max_x - 1
+			latest_x_drawn = x - 1
 
 func _clear_left_if_needed(player_x: int):
 	is_processing_right = false
+	var water_already_detected := false
+	var latest_clear_x := player_x - max_x
 	if player_x - max_x * 2 > earliest_x_drawn:
-		for x in range(player_x - max_x, earliest_x_drawn - 1, -1):
+		print("Clearing left, earliest_x_drawn: {0}, latest_clear_x: {1}".format([earliest_x_drawn, latest_clear_x]))
+		for x in range(earliest_x_drawn, latest_clear_x):
+			var height: int = height_dict[x]
+			var is_in_water := _is_in_water(height)
+			if is_in_water and not water_already_detected:
+				print("Checking water entry for x: {0}, height is: {1}".format([x, height]))
+				var water_entry = get_close_water_entry(x, water_start_dict)
+				if water_entry != null:
+					var water_end_loc: int = water_entry["end"]
+					var is_safe_to_clear := water_end_loc < latest_clear_x
+					if not is_safe_to_clear:
+						return
+				else:
+					is_in_water = false
+
+			water_already_detected = is_in_water
 			_erase_tile(x)
-		earliest_x_drawn = player_x - max_x + 1
+			earliest_x_drawn = x + 1
 
 func draw_water():
 	# Add a buffer to either end to prevent ensure enough waterline exists for rendering
 	var actual_water_start_x: int = min(water_start_x, water_end_x) - 1
 	var actual_water_end_x: int = max(water_start_x, water_end_x) + 1
+	print("Drawing water from {0} to {1}".format([water_start_x, water_end_x]))
 
 	# Processing the left results in tiles being shifted by 1
 	if not is_processing_right:
@@ -130,25 +167,34 @@ func draw_water():
 	water.setup_waterline(water_start, water_end, water_height)
 	water.entered_water.connect(_on_water_entered_water)
 	water.exited_water.connect(_on_water_exited_water)
-	water_start_dict[actual_water_start_x] = {"node": water, "end": actual_water_end_x}
-	water_end_dict[actual_water_end_x] = {"node": water, "start": actual_water_start_x}
+
+	if OS.is_debug_build() and water_start_dict.has(water_start_x):
+		push_error(memory_leak_message.format([water_start_x, "water_start_dict"]))
+	if OS.is_debug_build() and water_end_dict.has(water_end_x):
+		push_error(memory_leak_message.format([water_end_x, "water_end_dict"]))
+
+	print("Adding water to dicts")
+	water_start_dict[water_start_x] = {"node": water, "end": water_end_x}
+	water_end_dict[water_end_x] = {"node": water, "start": water_start_x}
+	_print_water_dicts()
 
 func _place_tile(x: int):
 	var y_val = _determine_y_value(x)
+	height_dict[x] = y_val
 	var vectors = range(y_val, depth).map(func(y): return Vector2i(x, y))
 	ground_layer.set_cells_terrain_connect(vectors, TERRAIN_SETS.GROUND, TERRAINS.GROUND)
-	if y_val <= water_height_in_tiles:
+	if not _is_in_water(y_val):
 		_place_objects(x, y_val)
 		if is_in_body_of_water:
 			if is_processing_right:
-				water_end_x = x
+				water_end_x = x - 1
 			else:
-				water_start_x = x
+				water_start_x = x + 1
 
 			draw_water()
 			is_in_body_of_water = false
 
-	if y_val > water_height_in_tiles:
+	if _is_in_water(y_val):
 		if !is_in_body_of_water:
 			is_in_body_of_water = true
 			if is_processing_right:
@@ -166,6 +212,10 @@ func _place_objects(x: int, y: int):
 			var item_instance = item.spawn_item.instantiate()
 			item_instance.position = ground_layer.map_to_local(Vector2i(x, y - 1))
 			add_child(item_instance)
+
+			if OS.is_debug_build() and instance_dict.has(x):
+				push_error(memory_leak_message.format([x, "instance_dict"]))
+
 			instance_dict[x] = item_instance
 			break
 
@@ -174,6 +224,7 @@ func _erase_tile(x: int):
 		ground_layer.erase_cell(Vector2i(x, y))
 	_erase_object(x)
 	_erase_water(x)
+	height_dict.erase(x)
 
 func _erase_object(x: int):
 	if instance_dict.has(x):
@@ -182,19 +233,18 @@ func _erase_object(x: int):
 		instance_dict.erase(x)
 
 func _erase_water(x: int):
-	if is_processing_right:
-		if water_start_dict.has(x):
-			var water = water_start_dict[x]["node"]
-			var water_end = water_start_dict[x]["end"]
-			water.queue_free()
-			water_start_dict.erase(x)
-			water_end_dict.erase(water_end)
-	elif water_end_dict.has(x):
+	if is_processing_right and water_end_dict.has(x):
 		var water = water_end_dict[x]["node"]
 		var water_start = water_end_dict[x]["start"]
 		water.queue_free()
 		water_end_dict.erase(x)
 		water_start_dict.erase(water_start)
+	elif water_start_dict.has(x):
+		var water = water_start_dict[x]["node"]
+		var water_end = water_start_dict[x]["end"]
+		water.queue_free()
+		water_start_dict.erase(x)
+		water_end_dict.erase(water_end)
 
 func _determine_y_value(x: int):
 	var noise_value = noise.get_noise_1d(x)
@@ -234,3 +284,20 @@ func _editor_force_redraw(_irrelevant: bool):
 
 func _return_false():
 	return false
+
+func _is_in_water(y_val) -> bool:
+	return y_val > water_height_in_tiles
+
+func get_close_water_entry(x: int, dict: Dictionary):
+	_print_water_dicts()
+	for i in range(x - 1, x + 2):
+		if dict.has(i):
+			print("Found water entry: {0}".format([dict[i]]))
+			return dict[i]
+
+	print("Water entry not found for x: {0}".format([x]))
+	return null
+
+func _print_water_dicts():
+	print("Start Water Dict: {}", [str(water_start_dict)])
+	print("End Water Dict: {}", [str(water_end_dict)])
