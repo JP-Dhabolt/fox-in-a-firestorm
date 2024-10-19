@@ -6,6 +6,13 @@ class_name TerrainGenerator
 @export var spawnable_items: Array[SpawnableItem] = []
 @export var water_scene: PackedScene
 
+@export_group("Terrain Size")
+@export var upper_terrain_limit: int = 4: set = _set_upper_terrain_limit, get = _get_upper_terrain_limit
+@export var lower_terrain_limit: int = 12: set = _set_lower_terrain_limit, get = _get_lower_terrain_limit
+@export var water_height_in_tiles: int = 8: set = _set_water_height_in_tiles, get = _get_water_height_in_tiles
+@export var minimum_x_generation_tiles: int = 20
+@export var draw_depth: int = 36
+
 @export_group("Noise")
 @export var force_refresh: bool = false: set = _editor_force_redraw, get = _return_false
 @export var noise: FastNoiseLite
@@ -27,13 +34,6 @@ var water_start_dict: Dictionary = {}
 var water_end_dict: Dictionary = {}
 var height_dict: Dictionary = {}
 
-var max_x: int
-var min_x: int = 0
-var max_y: int = 12
-var depth: int = 36
-var min_y: int
-var water_height_in_tiles: int
-
 var is_processing_right: bool = true
 var is_in_body_of_water: bool = false
 var water_start_x: int
@@ -50,15 +50,10 @@ const TERRAINS = {
 
 func _ready():
 	ground_layer.clear()
-	var viewport_rect = get_viewport_rect()
-	max_x = ceil(viewport_rect.size.x / TILE_HEIGHT_IN_PIXELS)
 
 	if not Engine.is_editor_hint():
-		max_y = ceil(viewport_rect.size.y / TILE_HEIGHT_IN_PIXELS)
 		noise.seed = randi()
 
-	min_y = ceil(max_y / 3.0)
-	water_height_in_tiles = min_y * 2
 	_draw_and_clear_map(0)
 
 func _verify_spawnable_items():
@@ -81,10 +76,10 @@ func _draw_and_clear_map(player_x: int):
 
 func _draw_right_if_needed(player_x: int):
 	is_processing_right = true
-	if player_x + max_x > latest_x_drawn:
-		for x in range(latest_x_drawn + 1, player_x + max_x + 1):
+	if player_x + minimum_x_generation_tiles > latest_x_drawn:
+		for x in range(latest_x_drawn + 1, player_x + minimum_x_generation_tiles + 1):
 			_place_tile(x)
-		latest_x_drawn = player_x + max_x
+		latest_x_drawn = player_x + minimum_x_generation_tiles
 
 		while is_in_body_of_water:
 			_place_tile(latest_x_drawn + 1)
@@ -92,10 +87,10 @@ func _draw_right_if_needed(player_x: int):
 
 func _draw_left_if_needed(player_x: int):
 	is_processing_right = false
-	if player_x - max_x < earliest_x_drawn:
-		for x in range(earliest_x_drawn - 1, player_x - max_x - 1, -1):
+	if player_x - minimum_x_generation_tiles < earliest_x_drawn:
+		for x in range(earliest_x_drawn - 1, player_x - minimum_x_generation_tiles - 1, -1):
 			_place_tile(x)
-		earliest_x_drawn = player_x - max_x
+		earliest_x_drawn = player_x - minimum_x_generation_tiles
 
 		while is_in_body_of_water:
 			_place_tile(earliest_x_drawn - 1)
@@ -104,8 +99,8 @@ func _draw_left_if_needed(player_x: int):
 func _clear_right_if_needed(player_x: int):
 	is_processing_right = true
 	var water_already_detected := false
-	var earliest_clear_x := player_x + max_x
-	if player_x + max_x * 2 < latest_x_drawn:
+	var earliest_clear_x := player_x + minimum_x_generation_tiles
+	if player_x + minimum_x_generation_tiles * 2 < latest_x_drawn:
 		for x in range(latest_x_drawn, earliest_clear_x, -1):
 			var is_in_water := _is_in_water(height_dict[x])
 			if is_in_water and not water_already_detected:
@@ -126,8 +121,8 @@ func _clear_right_if_needed(player_x: int):
 func _clear_left_if_needed(player_x: int):
 	is_processing_right = false
 	var water_already_detected := false
-	var latest_clear_x := player_x - max_x
-	if player_x - max_x * 2 > earliest_x_drawn:
+	var latest_clear_x := player_x - minimum_x_generation_tiles
+	if player_x - minimum_x_generation_tiles * 2 > earliest_x_drawn:
 		for x in range(earliest_x_drawn, latest_clear_x):
 			var height: int = height_dict[x]
 			var is_in_water := _is_in_water(height)
@@ -171,7 +166,7 @@ func draw_water():
 func _place_tile(x: int):
 	var y_val = _determine_y_value(x)
 	height_dict[x] = y_val
-	var vectors = range(y_val, depth).map(func(y): return Vector2i(x, y))
+	var vectors = range(y_val, draw_depth).map(func(y): return Vector2i(x, y))
 	ground_layer.set_cells_terrain_connect(vectors, TERRAIN_SETS.GROUND, TERRAINS.GROUND)
 	if not _is_in_water(y_val):
 		_place_objects(x, y_val)
@@ -210,7 +205,7 @@ func _place_objects(x: int, y: int):
 			break
 
 func _erase_tile(x: int):
-	for y in range(min_y, max_y):
+	for y in range(upper_terrain_limit, lower_terrain_limit):
 		ground_layer.erase_cell(Vector2i(x, y))
 	_erase_object(x)
 	_erase_water(x)
@@ -239,8 +234,8 @@ func _erase_water(x: int):
 func _determine_y_value(x: int):
 	var noise_value = noise.get_noise_1d(x)
 	var normalized_noise = (noise_value + 1) / 2
-	var y_range = max_y - min_y
-	return min_y + int(normalized_noise * y_range)
+	var y_range = lower_terrain_limit - upper_terrain_limit
+	return upper_terrain_limit + int(normalized_noise * y_range)
 
 func redraw_terrain():
 	ground_layer.clear()
@@ -256,8 +251,9 @@ func redraw_terrain():
 
 	noise.seed = randi()
 
-	for x in range(earliest_x_drawn, latest_x_drawn + 1):
-		_place_tile(x)
+	earliest_x_drawn = 0
+	latest_x_drawn = -1
+	_draw_and_clear_map(0)
 
 func _on_water_entered_water(body: Node2D):
 	entered_water.emit(body)
@@ -274,6 +270,31 @@ func _editor_force_redraw(_irrelevant: bool):
 
 func _return_false():
 	return false
+
+func _set_water_height_in_tiles(height: int):
+	# If the water is allowed to be less than upper_terrain_limit, it will generate infinitely
+	water_height_in_tiles = max(min(lower_terrain_limit, height), upper_terrain_limit + 1)
+	if Engine.is_editor_hint():
+		redraw_terrain()
+
+func _set_lower_terrain_limit(height: int):
+	lower_terrain_limit = height
+	if Engine.is_editor_hint():
+		redraw_terrain()
+
+func _set_upper_terrain_limit(height: int):
+	upper_terrain_limit = height
+	if Engine.is_editor_hint():
+		redraw_terrain()
+
+func _get_lower_terrain_limit():
+	return lower_terrain_limit
+
+func _get_upper_terrain_limit():
+	return upper_terrain_limit
+
+func _get_water_height_in_tiles():
+	return max(water_height_in_tiles, upper_terrain_limit + 1)
 
 func _is_in_water(y_val) -> bool:
 	return y_val > water_height_in_tiles
