@@ -246,6 +246,8 @@ func _determine_y_value(x: int):
 	return min_y + int(normalized_noise * y_range)
 
 func redraw_terrain():
+	if not is_node_ready():
+		return
 	ground_layer.clear()
 
 	for obj in instance_dict.values():
