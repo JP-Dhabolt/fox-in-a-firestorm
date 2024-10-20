@@ -59,6 +59,12 @@ func _handle_basic_movement():
 	if current_state.movement_allowed():
 		var movement = Input.get_axis("move_left", "move_right")
 		player.velocity.x = movement * movement_speed
+		if movement != 0:
+			if movement < 0:
+				player.face_left()
+			else:
+				player.face_right()
+
 	player.move_and_slide()
 	_handle_speed_updates()
 
