@@ -13,6 +13,8 @@ class_name Player
 @onready var state_machine := $PlayerStateMachine as PlayerStateMachine
 
 var elapsed_time: float = 0
+var sprite_x_pos_right: float = 10.5
+var sprite_x_pos_left: float = 9.5
 
 func _process(delta: float):
 	elapsed_time += delta
@@ -32,3 +34,11 @@ func _on_terrain_generator_entered_water(body: Node2D):
 func _on_terrain_generator_exited_water(body: Node2D):
 	if body is Player:
 		state_machine.transition_to(state_machine.states.jumping)
+
+func face_left():
+	sprite.flip_h = true
+	sprite.position.x = sprite_x_pos_left
+
+func face_right():
+	sprite.flip_h = false
+	sprite.position.x = sprite_x_pos_right
