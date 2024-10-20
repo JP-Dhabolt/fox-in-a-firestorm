@@ -18,13 +18,17 @@ func _ready():
 	if hide_quit_on_plaform:
 		desktop_exit_button.queue_free()
 
+	hide()
+
 func pause():
+	show()
 	animation_player.play("Pause")
 	get_tree().paused = true
 	continue_button.grab_focus()
 
 func unpause():
 	animation_player.play("Unpause")
+	hide()
 	get_tree().paused = false
 
 func _unhandled_input(event: InputEvent) -> void:
