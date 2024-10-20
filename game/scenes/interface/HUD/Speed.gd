@@ -1,10 +1,8 @@
 extends Label
 
-var player: Player
-func _ready():
-	await owner.ready
-	player = owner.player as Player
-	assert(player != null, "Player must be available to use this node")
-
 func _process(_delta):
-	text = "Speed: " + str(int(player.state_machine.movement_speed))
+	var speed: int = -99
+	if GameManager.current_player != null:
+		speed = int(GameManager.current_player.state_machine.movement_speed)
+
+	text = "Speed: " + str(speed)

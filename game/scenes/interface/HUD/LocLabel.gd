@@ -1,14 +1,11 @@
 extends Label
 
-var ground_layer: TileMapLayer
-var player: Player
-
-func _ready():
-	player = get_parent().player as Player
-	assert(player != null, "Player must be available to use this node")
-	ground_layer = get_parent().terrain_generator.ground_layer as TileMapLayer
-	assert(ground_layer != null, "TerrainGenerator TileMape must be available to use this node")
-
 func _process(_delta):
-	var tile_pos := ground_layer.local_to_map(player.global_position)
-	text = "Loc: " + str(tile_pos.x) + ", " + str(tile_pos.y)
+	var x_pos: int = -99
+	var y_pos: int = -99
+	if GameManager.current_player != null and GameManager.current_terrain_generator != null:
+		var tile_pos := GameManager.current_terrain_generator.ground_layer.local_to_map(GameManager.current_player.global_position)
+		x_pos = tile_pos.x
+		y_pos = tile_pos.y
+
+	text = "Loc: " + str(x_pos) + ", " + str(y_pos)
