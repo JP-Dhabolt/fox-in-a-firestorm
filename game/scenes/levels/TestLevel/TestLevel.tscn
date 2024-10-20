@@ -21,6 +21,8 @@ position = Vector2(-80, -80)
 [node name="TerrainGenerator" parent="." instance=ExtResource("5_p6tqq")]
 position = Vector2(-128, -128)
 spawnable_items = Array[ExtResource("4_o5si1")]([ExtResource("4_dxeso"), ExtResource("5_c7lt4")])
+max_depth = 14
+water_depth = 7
 
 [node name="MenuModal" parent="." instance=ExtResource("5_hsehm")]
 
@@ -28,4 +30,4 @@ spawnable_items = Array[ExtResource("4_o5si1")]([ExtResource("4_dxeso"), ExtReso
 
 [connection signal="entered_water" from="TerrainGenerator" to="Player" method="_on_terrain_generator_entered_water"]
 [connection signal="exited_water" from="TerrainGenerator" to="Player" method="_on_terrain_generator_exited_water"]
-[connection signal="body_entered" from="TerrainGenerator/Leaves" to="TerrainGenerator/Leaves" method="_on_Leaves_body_entered"]
+[connection signal="body_entered" from="TerrainGenerator/@Area2D@20671" to="TerrainGenerator/@Area2D@20671" method="_on_Leaves_body_entered"]

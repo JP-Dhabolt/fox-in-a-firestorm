@@ -7,11 +7,9 @@ class_name TerrainGenerator
 @export var water_scene: PackedScene
 
 @export_group("Terrain Size")
-@export var upper_terrain_limit: int = 4: set = _set_upper_terrain_limit, get = _get_upper_terrain_limit
-@export var lower_terrain_limit: int = 12: set = _set_lower_terrain_limit, get = _get_lower_terrain_limit
-@export var water_height_in_tiles: int = 8: set = _set_water_height_in_tiles, get = _get_water_height_in_tiles
-@export var minimum_x_generation_tiles: int = 20
-@export var draw_depth: int = 36
+@export var max_height_offset: int = 4: set = _set_max_height_offset, get = _get_max_height_offset
+@export var max_depth: int = 8: set = _set_max_depth, get = _get_max_depth
+@export var water_depth: int = 4: set = _set_water_depth, get = _get_water_depth
 
 @export_group("Noise")
 @export var force_refresh: bool = false: set = _editor_force_redraw, get = _return_false
@@ -25,8 +23,13 @@ signal exited_water(body: Node2D)
 
 const TILE_HEIGHT_IN_PIXELS: int = 16
 
-var earliest_x_drawn: int = 0
-var latest_x_drawn: int = -1
+var min_y: int
+var max_y: int
+var water_height_in_tiles: int
+var draw_depth: int
+var minimum_x_generation_tiles: int = 40
+var earliest_x_drawn: int
+var latest_x_drawn: int
 var elapsed_time = 0.0
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var instance_dict: Dictionary = {}
@@ -50,11 +53,16 @@ const TERRAINS = {
 
 func _ready():
 	ground_layer.clear()
+	min_y = max_height_offset
+	max_y = max_height_offset + max_depth
+	water_height_in_tiles = max_height_offset + water_depth
+	draw_depth = max_y + 10
+	_reset_earliest_and_latest_x_drawn()
 
 	if not Engine.is_editor_hint():
 		noise.seed = randi()
 
-	_draw_and_clear_map(0)
+	_draw_and_clear_map(1)
 
 func _verify_spawnable_items():
 	var total_spawn_chance = 0.0
@@ -205,7 +213,7 @@ func _place_objects(x: int, y: int):
 			break
 
 func _erase_tile(x: int):
-	for y in range(upper_terrain_limit, lower_terrain_limit):
+	for y in range(min_y, max_y):
 		ground_layer.erase_cell(Vector2i(x, y))
 	_erase_object(x)
 	_erase_water(x)
@@ -234,8 +242,8 @@ func _erase_water(x: int):
 func _determine_y_value(x: int):
 	var noise_value = noise.get_noise_1d(x)
 	var normalized_noise = (noise_value + 1) / 2
-	var y_range = lower_terrain_limit - upper_terrain_limit
-	return upper_terrain_limit + int(normalized_noise * y_range)
+	var y_range = max_y - min_y
+	return min_y + int(normalized_noise * y_range)
 
 func redraw_terrain():
 	ground_layer.clear()
@@ -251,9 +259,8 @@ func redraw_terrain():
 
 	noise.seed = randi()
 
-	earliest_x_drawn = 0
-	latest_x_drawn = -1
-	_draw_and_clear_map(0)
+	_reset_earliest_and_latest_x_drawn()
+	_draw_and_clear_map(1)
 
 func _on_water_entered_water(body: Node2D):
 	entered_water.emit(body)
@@ -271,30 +278,38 @@ func _editor_force_redraw(_irrelevant: bool):
 func _return_false():
 	return false
 
-func _set_water_height_in_tiles(height: int):
-	# If the water is allowed to be less than upper_terrain_limit, it will generate infinitely
-	water_height_in_tiles = max(min(lower_terrain_limit, height), upper_terrain_limit + 1)
+func _set_water_depth(depth: int):
+	water_depth = depth
+	water_height_in_tiles = max_height_offset + water_depth
 	if Engine.is_editor_hint():
 		redraw_terrain()
 
-func _set_lower_terrain_limit(height: int):
-	lower_terrain_limit = height
+func _set_max_depth(depth: int):
+	max_depth = depth
+	max_y = max_height_offset + max_depth
 	if Engine.is_editor_hint():
 		redraw_terrain()
 
-func _set_upper_terrain_limit(height: int):
-	upper_terrain_limit = height
+func _set_max_height_offset(tiles: int):
+	max_height_offset = tiles
+	min_y = max_height_offset
+	max_y = max_height_offset + max_depth
+	water_height_in_tiles = max_height_offset + water_depth
 	if Engine.is_editor_hint():
 		redraw_terrain()
 
-func _get_lower_terrain_limit():
-	return lower_terrain_limit
+func _get_max_depth():
+	return max_depth
 
-func _get_upper_terrain_limit():
-	return upper_terrain_limit
+func _get_max_height_offset():
+	return max_height_offset
 
-func _get_water_height_in_tiles():
-	return max(water_height_in_tiles, upper_terrain_limit + 1)
+func _get_water_depth():
+	return water_depth
 
 func _is_in_water(y_val) -> bool:
 	return y_val > water_height_in_tiles
+
+func _reset_earliest_and_latest_x_drawn():
+	earliest_x_drawn = -minimum_x_generation_tiles * 3
+	latest_x_drawn = earliest_x_drawn - 1
