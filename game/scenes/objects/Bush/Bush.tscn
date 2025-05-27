@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cqxpnx2h0qmof"]
 
-[ext_resource type="Script" path="res://scenes/objects/Bush/Bush.gd" id="1_nytwi"]
+[ext_resource type="Script" uid="uid://dqd6q58t73433" path="res://scenes/objects/Bush/Bush.gd" id="1_nytwi"]
 [ext_resource type="Texture2D" uid="uid://d2gistts5ig2x" path="res://sprites/sunnyland_2d_pixel_art_pack/bush-color-modified.png" id="1_wwkum"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j5rnc"]

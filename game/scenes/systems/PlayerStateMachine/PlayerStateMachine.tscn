@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bjr754j6go216"]
 
-[ext_resource type="Script" path="res://scenes/systems/PlayerStateMachine/PlayerStateMachine.gd" id="1_rcts5"]
+[ext_resource type="Script" uid="uid://cw3f13hpbfmjb" path="res://scenes/systems/PlayerStateMachine/PlayerStateMachine.gd" id="1_rcts5"]
 
 [node name="PlayerStateMachine" type="Node"]
 script = ExtResource("1_rcts5")

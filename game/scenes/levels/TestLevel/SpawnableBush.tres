@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="SpawnableItem" load_steps=3 format=3 uid="uid://ciylhfor8pce6"]
 
-[ext_resource type="Script" path="res://custom_resources/SpawnableItem.gd" id="1_eot6i"]
+[ext_resource type="Script" uid="uid://cimjyn8hc13r" path="res://custom_resources/SpawnableItem.gd" id="1_eot6i"]
 [ext_resource type="PackedScene" uid="uid://cqxpnx2h0qmof" path="res://scenes/objects/Bush/Bush.tscn" id="2_xc8fp"]
 
 [resource]

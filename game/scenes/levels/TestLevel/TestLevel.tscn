@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://dsyeewn78c28r"]
 
-[ext_resource type="Script" path="res://scenes/levels/TestLevel/TestLevel.gd" id="1_0muv3"]
+[ext_resource type="Script" uid="uid://dehfttk1gtsii" path="res://scenes/levels/TestLevel/TestLevel.gd" id="1_0muv3"]
 [ext_resource type="PackedScene" uid="uid://cqnuwdbv7t1jm" path="res://scenes/characters/Player/Player.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://ub25a470q2tw" path="res://scenes/interface/HUD/HUD.tscn" id="2_j5s88"]
 [ext_resource type="Resource" uid="uid://bxrhlvm471kb3" path="res://scenes/levels/TestLevel/SpawnableLeaf.tres" id="4_dxeso"]
-[ext_resource type="Script" path="res://custom_resources/SpawnableItem.gd" id="4_o5si1"]
+[ext_resource type="Script" uid="uid://cimjyn8hc13r" path="res://custom_resources/SpawnableItem.gd" id="4_o5si1"]
 [ext_resource type="Resource" uid="uid://ciylhfor8pce6" path="res://scenes/levels/TestLevel/SpawnableBush.tres" id="5_c7lt4"]
 [ext_resource type="PackedScene" uid="uid://g5xdeqs6ky7f" path="res://scenes/interface/MenuModal/MenuModal.tscn" id="5_hsehm"]
 [ext_resource type="PackedScene" uid="uid://ceqcxqo62twgj" path="res://scenes/systems/TerrainGenerator/TerrainGenerator.tscn" id="5_p6tqq"]

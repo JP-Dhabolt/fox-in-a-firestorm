@@ -3,11 +3,11 @@
 [ext_resource type="PackedScene" uid="uid://cqnuwdbv7t1jm" path="res://scenes/characters/Player/Player.tscn" id="1_1t5xb"]
 [ext_resource type="PackedScene" uid="uid://cqxpnx2h0qmof" path="res://scenes/objects/Bush/Bush.tscn" id="2_y0351"]
 [ext_resource type="PackedScene" uid="uid://bbgdrnpmiv3ny" path="res://scenes/objects/Leaves/Leaves.tscn" id="3_gs0gt"]
-[ext_resource type="Shader" path="res://shaders/Water.gdshader" id="4_ym8dd"]
-[ext_resource type="Texture2D" uid="uid://c6vyh78p8pvl0" path="res://icon.png" id="5_0meb6"]
-[ext_resource type="Script" path="res://tests/shaders/TestWater.gd" id="6_3i1u3"]
-[ext_resource type="Script" path="res://tests/shaders/WaterPolygon.gd" id="7_6auiq"]
-[ext_resource type="Shader" path="res://shaders/PolygonWater.gdshader" id="7_db4li"]
+[ext_resource type="Shader" uid="uid://csrdbvwjeuv3f" path="res://shaders/Water.gdshader" id="4_ym8dd"]
+[ext_resource type="Texture2D" uid="uid://daqsdnnmsfqrd" path="res://icon.png" id="5_0meb6"]
+[ext_resource type="Script" uid="uid://b5f4ieckppmmv" path="res://tests/shaders/TestWater.gd" id="6_3i1u3"]
+[ext_resource type="Script" uid="uid://gr8epvwptqgj" path="res://tests/shaders/WaterPolygon.gd" id="7_6auiq"]
+[ext_resource type="Shader" uid="uid://daqmcqu672dkf" path="res://shaders/PolygonWater.gdshader" id="7_db4li"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_drbo1"]
 noise_type = 0
@@ -22,11 +22,11 @@ shader = ExtResource("4_ym8dd")
 shader_parameter/scale = Vector2(2.20215, 1.10938)
 shader_parameter/y_zoom = 4.75683
 shader_parameter/water_color = Color(0.31, 0.71, 0.78, 0.71)
+shader_parameter/noise = SubResource("NoiseTexture2D_cy2y1")
 shader_parameter/distortion_scale = Vector2(0.29, 0.65)
 shader_parameter/distortion_intensity = 0.02
 shader_parameter/time_scale = 0.09
 shader_parameter/water_transparency = 0.824
-shader_parameter/noise = SubResource("NoiseTexture2D_cy2y1")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ea8do"]
 noise_type = 0
@@ -41,11 +41,11 @@ shader_parameter/scale = Vector2(0.43, 0.84)
 shader_parameter/offset = Vector2(2.1, 0.66)
 shader_parameter/y_zoom = 4.75683
 shader_parameter/water_color = Color(0.31, 0.71, 0.78, 0.71)
+shader_parameter/noise = SubResource("NoiseTexture2D_v7hpi")
 shader_parameter/distortion_scale = Vector2(0.29, 0.65)
 shader_parameter/distortion_intensity = 0.02
 shader_parameter/time_scale = 0.09
 shader_parameter/water_transparency = 0.824
-shader_parameter/noise = SubResource("NoiseTexture2D_v7hpi")
 
 [node name="Node2D" type="Node2D"]
 
