@@ -19,7 +19,3 @@ position = Vector2(155, 99)
 texture = ExtResource("2_rflj3")
 
 [node name="MainMenu" parent="." instance=ExtResource("3_iaaow")]
-offset_left = 158.0
-offset_top = 95.0
-offset_right = 158.0
-offset_bottom = 95.0
