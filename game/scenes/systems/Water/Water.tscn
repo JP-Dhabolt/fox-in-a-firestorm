@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://cnvy3kf61ktp1"]
 
-[ext_resource type="Script" path="res://scenes/systems/Water/Water.gd" id="1_abg6w"]
-[ext_resource type="Script" path="res://scenes/systems/Water/WaterBody.gd" id="2_a4vfj"]
-[ext_resource type="Shader" path="res://shaders/PolygonWater.gdshader" id="2_l2fyl"]
+[ext_resource type="Script" uid="uid://1sgwg3ftby04" path="res://scenes/systems/Water/Water.gd" id="1_abg6w"]
+[ext_resource type="Script" uid="uid://babb7doyi0ryw" path="res://scenes/systems/Water/WaterBody.gd" id="2_a4vfj"]
+[ext_resource type="Shader" uid="uid://daqmcqu672dkf" path="res://shaders/PolygonWater.gdshader" id="2_l2fyl"]
 [ext_resource type="Texture2D" uid="uid://daqsdnnmsfqrd" path="res://icon.png" id="3_fxmkt"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_wqp33"]
@@ -18,11 +18,11 @@ shader_parameter/scale = Vector2(1, 1)
 shader_parameter/offset = Vector2(2.165, 0.165)
 shader_parameter/y_zoom = 2.82843
 shader_parameter/water_color = Color(0.31, 0.71, 0.78, 0.71)
+shader_parameter/noise = SubResource("NoiseTexture2D_tlm87")
 shader_parameter/distortion_scale = Vector2(0.29, 0.65)
 shader_parameter/distortion_intensity = 0.02
 shader_parameter/time_scale = 0.09
 shader_parameter/water_transparency = 0.824
-shader_parameter/noise = SubResource("NoiseTexture2D_tlm87")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m8syw"]
 size = Vector2(1846, 1000)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=4 uid="uid://ceqcxqo62twgj"]
 
-[ext_resource type="Script" path="res://scenes/systems/TerrainGenerator/TerrainGenerator.gd" id="1_woahw"]
+[ext_resource type="Script" uid="uid://cbpxrgmhai3g2" path="res://scenes/systems/TerrainGenerator/TerrainGenerator.gd" id="1_woahw"]
 [ext_resource type="Texture2D" uid="uid://gqsnjo7oejik" path="res://sprites/sunnyland_2d_pixel_art_pack/tileset-modified.png" id="1_ykw5y"]
 [ext_resource type="PackedScene" uid="uid://cnvy3kf61ktp1" path="res://scenes/systems/Water/Water.tscn" id="3_ties4"]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://g5xdeqs6ky7f"]
 
-[ext_resource type="Shader" path="res://scenes/interface/MenuModal/blur.gdshader" id="1_nofqy"]
-[ext_resource type="Script" path="res://scenes/interface/MenuModal/MenuModal.gd" id="2_f76qs"]
+[ext_resource type="Shader" uid="uid://5872oxkxh8yh" path="res://scenes/interface/MenuModal/blur.gdshader" id="1_nofqy"]
+[ext_resource type="Script" uid="uid://v0g4516kvqxe" path="res://scenes/interface/MenuModal/MenuModal.gd" id="2_f76qs"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oukxm"]
 shader = ExtResource("1_nofqy")
@@ -129,9 +129,9 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_71way"]
 _data = {
-"Pause": SubResource("Animation_c8duk"),
-"RESET": SubResource("Animation_5mwys"),
-"Unpause": SubResource("Animation_mruah")
+&"Pause": SubResource("Animation_c8duk"),
+&"RESET": SubResource("Animation_5mwys"),
+&"Unpause": SubResource("Animation_mruah")
 }
 
 [node name="CanvasLayer" type="CanvasLayer"]

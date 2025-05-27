@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="SpawnableItem" load_steps=3 format=3 uid="uid://bxrhlvm471kb3"]
 
-[ext_resource type="Script" path="res://custom_resources/SpawnableItem.gd" id="1_4oh8q"]
+[ext_resource type="Script" uid="uid://cimjyn8hc13r" path="res://custom_resources/SpawnableItem.gd" id="1_4oh8q"]
 [ext_resource type="PackedScene" uid="uid://bbgdrnpmiv3ny" path="res://scenes/objects/Leaves/Leaves.tscn" id="2_8lp0b"]
 
 [resource]

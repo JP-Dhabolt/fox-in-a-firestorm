@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://ub25a470q2tw"]
 
-[ext_resource type="Script" path="res://scenes/interface/HUD/Food.gd" id="2_o3t81"]
-[ext_resource type="Script" path="res://scenes/interface/HUD/Speed.gd" id="3_780r7"]
-[ext_resource type="Script" path="res://scenes/interface/HUD/LocLabel.gd" id="4_80ii1"]
-[ext_resource type="Script" path="res://scenes/interface/HUD/HeatLabel.gd" id="5_tbadt"]
+[ext_resource type="Script" uid="uid://jc1jajon8ope" path="res://scenes/interface/HUD/Food.gd" id="2_o3t81"]
+[ext_resource type="Script" uid="uid://h0dkcnik2v7p" path="res://scenes/interface/HUD/Speed.gd" id="3_780r7"]
+[ext_resource type="Script" uid="uid://dy33yaebxn80k" path="res://scenes/interface/HUD/LocLabel.gd" id="4_80ii1"]
+[ext_resource type="Script" uid="uid://bkod3f12pwchg" path="res://scenes/interface/HUD/HeatLabel.gd" id="5_tbadt"]
 
 [node name="HUD" type="CanvasLayer"]
 
