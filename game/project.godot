@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Fox_in_a_Firestorm"
+config/version="Local"
 run/main_scene="res://scenes/levels/Main.tscn"
 config/features=PackedStringArray("4.4")
 config/icon="res://icon.png"

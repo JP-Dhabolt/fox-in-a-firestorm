@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://cwlq63ooe0kf1"]
+[gd_scene load_steps=6 format=3 uid="uid://cwlq63ooe0kf1"]
 
 [ext_resource type="Texture2D" uid="uid://b2nlw4agsakeo" path="res://sprites/sunnyland_forest_of_illusion/back.png" id="1_iohad"]
+[ext_resource type="Script" uid="uid://bx8nagbmw26ce" path="res://scenes/levels/Main.gd" id="1_ywf1f"]
 [ext_resource type="Texture2D" uid="uid://6ui8eidfwdx7" path="res://sprites/sunnyland_forest_of_illusion/middle.png" id="2_rflj3"]
 [ext_resource type="PackedScene" uid="uid://be1sw78cnhfjp" path="res://scenes/interface/MainMenu/MainMenu.tscn" id="3_iaaow"]
+[ext_resource type="PackedScene" uid="uid://cs6mhwhetd0uc" path="res://scenes/interface/AboutMenu/AboutMenu.tscn" id="4_5vxlb"]
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_ywf1f")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(80, 101)
@@ -18,4 +21,9 @@ texture = ExtResource("1_iohad")
 position = Vector2(155, 99)
 texture = ExtResource("2_rflj3")
 
-[node name="MainMenu" parent="." instance=ExtResource("3_iaaow")]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MainMenu" parent="CanvasLayer" instance=ExtResource("3_iaaow")]
+
+[node name="AboutMenu" parent="CanvasLayer" instance=ExtResource("4_5vxlb")]
+visible = false

@@ -2,9 +2,7 @@
 
 [ext_resource type="Script" uid="uid://1tsrs6tdg8ur" path="res://scenes/interface/MainMenu/MainMenu.gd" id="2_g1n1f"]
 
-[node name="CanvasLayer" type="CanvasLayer"]
-
-[node name="MainMenu" type="ColorRect" parent="."]
+[node name="MainMenu" type="ColorRect"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -13,7 +11,7 @@ grow_vertical = 2
 color = Color(1, 1, 1, 0)
 script = ExtResource("2_g1n1f")
 
-[node name="CenterContainer" type="CenterContainer" parent="MainMenu"]
+[node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,33 +19,38 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="MainMenu/CenterContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="MainMenu/CenterContainer/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/CenterContainer/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="MainMenuLabel" type="Label" parent="MainMenu/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="MainMenuLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Fox in a Firestorm"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="MainMenu/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="TestLevelButton" type="Button" parent="MainMenu/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="TestLevelButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 text = "Test Level"
 
-[node name="QuitButton" type="Button" parent="MainMenu/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="AboutButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "About"
+
+[node name="QuitButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 text = "Quit"
