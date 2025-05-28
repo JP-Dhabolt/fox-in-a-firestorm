@@ -198,6 +198,6 @@ text = "Exit to Desktop"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MenuModal"]
 libraries = {
-"": SubResource("AnimationLibrary_71way")
+&"": SubResource("AnimationLibrary_71way")
 }
 autoplay = "Unpause"

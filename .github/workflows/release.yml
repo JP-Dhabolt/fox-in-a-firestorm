@@ -23,6 +23,11 @@ jobs:
         WITH_V: true
         DEFAULT_BUMP: patch
 
+    - name: Update version in override.cfg
+      run: sed -i "s/__placeholder_version__/${NEW_TAG}/g" ./game/override.cfg
+      env:
+        NEW_TAG: ${{ steps.tag.outputs.new_tag }}
+
     - name: Build
       id: export
       uses: firebelley/godot-export@v5.2.1
