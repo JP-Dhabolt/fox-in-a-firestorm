@@ -103,6 +103,10 @@ pounce={
 ]
 }
 
+[internationalization]
+
+locale/include_text_server_data=true
+
 [layer_names]
 
 2d_physics/layer_1="Ground"
