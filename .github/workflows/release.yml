@@ -24,9 +24,11 @@ jobs:
         DEFAULT_BUMP: patch
 
     - name: Update version in override.cfg
-      run: sed -i "s/__placeholder_version__/${NEW_TAG}/g" ./game/override.cfg
+      run: sed -i "s/${VERSION_PLACEHOLDER}/${NEW_TAG}/g" ${UPDATE_FILE}
       env:
         NEW_TAG: ${{ steps.tag.outputs.new_tag }}
+        VERSION_PLACEHOLDER: __placeholder_version__
+        UPDATE_FILE: ./game/project.godot
 
     - name: Build
       id: export
