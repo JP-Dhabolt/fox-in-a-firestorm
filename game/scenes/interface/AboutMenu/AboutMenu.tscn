@@ -34,6 +34,7 @@ layout_mode = 2
 
 [node name="VersionLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = "Version x.x.x"
 horizontal_alignment = 1
 
@@ -42,18 +43,23 @@ layout_mode = 2
 
 [node name="CopyLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Copyright 2025 by JP Dhabolt"
+theme_override_font_sizes/font_size = 12
+text = "Copyright 2025 by GwyddionGames"
 horizontal_alignment = 1
 
 [node name="HSeparator2" type="HSeparator" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="CreditLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="CreditLabel" type="TextEdit" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
-text = "Credits at https://github.com/JP-Dhabolt/fox-in-a-firestorm/blob/main/CREDITS.md"
-horizontal_alignment = 1
+theme_override_font_sizes/font_size = 12
+text = "Credits:
+https://github.com/JP-Dhabolt/fox-in-a-firestorm/blob/main/CREDITS.md"
+editable = false
+wrap_mode = 1
 autowrap_mode = 2
+scroll_fit_content_height = true
 
 [node name="ReturnButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2

@@ -9,14 +9,14 @@ jobs:
     name: Build and Test Game
     steps:
     - name: checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
 
     - name: Build Game
-      uses: firebelley/godot-export@v5.2.1
+      uses: firebelley/godot-export@29965918cc35b77c465839035775e0e12dc87029  # v6.0.0
       with:
         godot_executable_download_url: https://github.com/godotengine/godot/releases/download/4.4.1-stable/Godot_v4.4.1-stable_linux.x86_64.zip
         godot_export_templates_download_url: https://github.com/godotengine/godot/releases/download/4.4.1-stable/Godot_v4.4.1-stable_export_templates.tpz
         relative_project_path: ./game/
-        cache: true
+        cache: false  # cache is not working
         archive_output: false
         relative_export_path: ./game/export
